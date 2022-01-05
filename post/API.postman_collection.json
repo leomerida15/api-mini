@@ -1,0 +1,963 @@
+{
+	"info": {
+		"_postman_id": "432f7248-cde2-423d-a188-551f9468c3e5",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"test@test.com\",\r\n    \"password\":\"Test123.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"test@test.com\",\r\n    \"password\":\"Test123.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "533"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Dec 2021 19:11:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"usuario logeado\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDU0NTkwMH0.oPX6Pn_ZRm2FlB-gam4KaVUy_i8w_iQvMvgk09UV74o\",\n    \"info\": {\n        \"id\": 1,\n        \"name\": \"test\",\n        \"email\": \"test@test.com\",\n        \"roles\": [\n            {\n                \"id\": 1,\n                \"name\": \"Admin\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Usuario proponente\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Usuario votante\"\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Usuario revisor\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test\",\r\n    \"email\":\"test@test.com\",\r\n    \"password\":\"Test123.\",\r\n    \"roles\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Admin\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"Usuario proponente\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"Usuario votante\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"name\": \"Usuario revisor\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"test\",\r\n    \"email\":\"test@test.com\",\r\n    \"password\":\"Test123.\",\r\n    \"roles\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Admin\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"Usuario proponente\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"Usuario votante\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"name\": \"Usuario revisor\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "303"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Dec 2021 19:11:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"usuario registrado\",\n    \"info\": {\n        \"id\": 1,\n        \"name\": \"test\",\n        \"email\": \"test@test.com\",\n        \"roles\": [\n            {\n                \"id\": 1,\n                \"name\": \"Admin\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Usuario proponente\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Usuario votante\"\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Usuario revisor\"\n            }\n        ],\n        \"createdAt\": \"2021-12-26T19:11:30.370Z\",\n        \"updatedAt\": \"2021-12-26T19:11:30.370Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Elections",
+			"item": [
+				{
+					"name": "crear eleccion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+								"description": "token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test de Eleccion test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/v1/elections",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"elections"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "crear eleccion",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+										"description": "token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"test de Eleccion test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/elections",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"elections"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "206"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Dec 2021 18:33:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Eleccion creada\",\n    \"info\": {\n        \"id\": 3,\n        \"name\": \"test de Eleccion test\",\n        \"status\": true,\n        \"deleteAt\": \"2022-01-02T22:29:56.338Z\",\n        \"createdAt\": \"2021-12-26T18:33:40.940Z\",\n        \"updatedAt\": \"2021-12-26T18:33:40.940Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "todas las elecciones",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAxNTE3OH0.lEwGUcLvNXwovHGStgkxSXMLfMLRKsuhSPznnOvVKQk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/v1/elections",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"elections"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "todas las elecciones",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAxNTE3OH0.lEwGUcLvNXwovHGStgkxSXMLfMLRKsuhSPznnOvVKQk",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/elections",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"elections"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "4811"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Dec 2021 18:36:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Elecciones\",\n    \"info\": [\n        {\n            \"id\": 1,\n            \"name\": \"test de Eleccion 3\",\n            \"status\": true,\n            \"deleteAt\": \"2022-01-01T21:42:42.661Z\",\n            \"createdAt\": \"2021-12-25T17:45:44.320Z\",\n            \"updatedAt\": \"2021-12-25T17:45:44.320Z\",\n            \"Options\": [\n                {\n                    \"id\": 12,\n                    \"title\": \"titulo de test 6\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T18:00:09.270Z\",\n                    \"updatedAt\": \"2021-12-26T18:00:09.270Z\",\n                    \"Imgs\": [\n                        {\n                            \"id\": 1,\n                            \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\0e0e6fdc-40b5-444e-8c43-2358fdcdb81e@Hip_Script_Etsy_Shop_Icon.png\",\n                            \"format\": \"image/png\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 14,\n                    \"title\": \"titulo \",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T18:01:32.221Z\",\n                    \"updatedAt\": \"2021-12-26T18:01:32.221Z\",\n                    \"Imgs\": [\n                        {\n                            \"id\": 2,\n                            \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\d78c5cd5-5a26-485d-9d7b-04485c8a66b7@Hip_Script_Etsy_Shop_Icon.png\",\n                            \"format\": \"image/png\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 15,\n                    \"title\": \"titulo  1\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T18:06:44.264Z\",\n                    \"updatedAt\": \"2021-12-26T18:06:44.264Z\",\n                    \"Imgs\": [\n                        {\n                            \"id\": 3,\n                            \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\ec066480-54b5-4a3c-8c2c-a446fc47135e@Hip_Script_Etsy_Shop_Icon.png\",\n                            \"format\": \"image/png\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 17,\n                    \"title\": \"titulo  2\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T18:07:23.158Z\",\n                    \"updatedAt\": \"2021-12-26T18:07:23.158Z\",\n                    \"Imgs\": [\n                        {\n                            \"id\": 4,\n                            \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\6ac24d37-0179-49e5-91d1-0ca0464c8776@Hip_Script_Etsy_Shop_Icon.png\",\n                            \"format\": \"image/png\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 18,\n                    \"title\": \"titulo  3\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T18:08:17.930Z\",\n                    \"updatedAt\": \"2021-12-26T18:08:17.930Z\",\n                    \"Imgs\": [\n                        {\n                            \"id\": 5,\n                            \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\d08655c4-ddfa-4be7-af63-82219796c55d@Hip_Script_Etsy_Shop_Icon.png\",\n                            \"format\": \"image/png\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 19,\n                    \"title\": \"titulo  4\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T18:08:27.947Z\",\n                    \"updatedAt\": \"2021-12-26T18:08:27.947Z\",\n                    \"Imgs\": [\n                        {\n                            \"id\": 6,\n                            \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\86ead505-fec9-45cf-818a-73c7ed1eb388@Hip_Script_Etsy_Shop_Icon.png\",\n                            \"format\": \"image/png\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 21,\n                    \"title\": \"titulo  5\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T18:09:08.062Z\",\n                    \"updatedAt\": \"2021-12-26T18:09:08.062Z\",\n                    \"Imgs\": [\n                        {\n                            \"id\": 7,\n                            \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\32be383a-6e09-485a-bc4f-f622cca273ec@Hip_Script_Etsy_Shop_Icon.png\",\n                            \"format\": \"image/png\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 22,\n                    \"title\": \"titulo  6\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T18:10:09.028Z\",\n                    \"updatedAt\": \"2021-12-26T18:10:09.028Z\",\n                    \"Imgs\": [\n                        {\n                            \"id\": 8,\n                            \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\9a1e8fd5-ac38-4d92-8005-54ba5fb080c2@Hip_Script_Etsy_Shop_Icon.png\",\n                            \"format\": \"image/png\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 23,\n                    \"title\": \"titulo  7\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T18:32:08.633Z\",\n                    \"updatedAt\": \"2021-12-26T18:32:08.633Z\",\n                    \"Imgs\": [\n                        {\n                            \"id\": 9,\n                            \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\87cbed62-f94c-4b40-bc1d-fc14e56ea7b8@Hip_Script_Etsy_Shop_Icon.png\",\n                            \"format\": \"image/png\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 11,\n                    \"title\": \"titulo de test 5\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T16:11:40.801Z\",\n                    \"updatedAt\": \"2021-12-26T16:11:40.801Z\",\n                    \"Imgs\": []\n                },\n                {\n                    \"id\": 5,\n                    \"title\": \"titulo de test 1\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-25T23:15:48.247Z\",\n                    \"updatedAt\": \"2021-12-25T23:15:48.247Z\",\n                    \"Imgs\": []\n                },\n                {\n                    \"id\": 8,\n                    \"title\": \"titulo de test 3\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T15:44:13.647Z\",\n                    \"updatedAt\": \"2021-12-26T15:44:13.647Z\",\n                    \"Imgs\": []\n                },\n                {\n                    \"id\": 1,\n                    \"title\": \"titulo de test\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-25T17:53:13.526Z\",\n                    \"updatedAt\": \"2021-12-25T17:53:13.526Z\",\n                    \"Imgs\": []\n                },\n                {\n                    \"id\": 9,\n                    \"title\": \"titulo de test 4\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T15:46:09.364Z\",\n                    \"updatedAt\": \"2021-12-26T15:46:09.364Z\",\n                    \"Imgs\": []\n                },\n                {\n                    \"id\": 7,\n                    \"title\": \"titulo de test 2\",\n                    \"descript\": \"descriccion compelta\",\n                    \"votes\": 0,\n                    \"createdAt\": \"2021-12-26T15:41:33.229Z\",\n                    \"updatedAt\": \"2021-12-26T15:41:33.229Z\",\n                    \"Imgs\": []\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"name\": \"test de Eleccion new\",\n            \"status\": true,\n            \"deleteAt\": \"2022-01-02T22:29:56.338Z\",\n            \"createdAt\": \"2021-12-26T18:33:12.189Z\",\n            \"updatedAt\": \"2021-12-26T18:33:12.189Z\",\n            \"Options\": []\n        },\n        {\n            \"id\": 3,\n            \"name\": \"test de Eleccion test\",\n            \"status\": true,\n            \"deleteAt\": \"2022-01-02T22:29:56.338Z\",\n            \"createdAt\": \"2021-12-26T18:33:40.940Z\",\n            \"updatedAt\": \"2021-12-26T18:33:40.940Z\",\n            \"Options\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "solicitar una eleccion por id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+								"description": "token",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/v1/elections/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"elections",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "solicitar una eleccion por id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+										"description": "token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/elections/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"elections",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "3157"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Dec 2021 18:37:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Eleccion\",\n    \"info\": {\n        \"id\": 1,\n        \"name\": \"test de Eleccion 3\",\n        \"status\": true,\n        \"deleteAt\": \"2022-01-01T21:42:42.661Z\",\n        \"createdAt\": \"2021-12-25T17:45:44.320Z\",\n        \"updatedAt\": \"2021-12-25T17:45:44.320Z\",\n        \"Options\": [\n            {\n                \"title\": \"titulo de test\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 1\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 2\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 3\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 4\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 5\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 6\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": [\n                    {\n                        \"id\": 1,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\0e0e6fdc-40b5-444e-8c43-2358fdcdb81e@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo \",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": [\n                    {\n                        \"id\": 2,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\d78c5cd5-5a26-485d-9d7b-04485c8a66b7@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  1\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": [\n                    {\n                        \"id\": 3,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\ec066480-54b5-4a3c-8c2c-a446fc47135e@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  2\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": [\n                    {\n                        \"id\": 4,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\6ac24d37-0179-49e5-91d1-0ca0464c8776@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  3\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": [\n                    {\n                        \"id\": 5,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\d08655c4-ddfa-4be7-af63-82219796c55d@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  4\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": [\n                    {\n                        \"id\": 6,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\86ead505-fec9-45cf-818a-73c7ed1eb388@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  5\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": [\n                    {\n                        \"id\": 7,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\32be383a-6e09-485a-bc4f-f622cca273ec@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  6\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": [\n                    {\n                        \"id\": 8,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\9a1e8fd5-ac38-4d92-8005-54ba5fb080c2@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  7\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"Imgs\": [\n                    {\n                        \"id\": 9,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\87cbed62-f94c-4b40-bc1d-fc14e56ea7b8@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "editar una eleccion por id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+								"description": "token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test de Eleccion test aa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/v1/elections/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"elections",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "editar una eleccion por id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+										"description": "token",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"test de Eleccion test aa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/elections/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"elections",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "3298"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Dec 2021 19:09:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Se a editado el Elections   \",\n    \"info\": {\n        \"id\": 1,\n        \"name\": \"test de Eleccion test aa\",\n        \"status\": true,\n        \"deleteAt\": \"2022-01-01T21:42:42.661Z\",\n        \"createdAt\": \"2021-12-25T17:45:44.320Z\",\n        \"updatedAt\": \"2021-12-26T19:09:50.124Z\",\n        \"Options\": [\n            {\n                \"title\": \"titulo de test\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 1,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 1\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 5,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 2\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 7,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 3\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 8,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 4\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 9,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 5\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 11,\n                \"Imgs\": []\n            },\n            {\n                \"title\": \"titulo de test 6\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 12,\n                \"Imgs\": [\n                    {\n                        \"id\": 1,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\0e0e6fdc-40b5-444e-8c43-2358fdcdb81e@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo \",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 14,\n                \"Imgs\": [\n                    {\n                        \"id\": 2,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\d78c5cd5-5a26-485d-9d7b-04485c8a66b7@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  1\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 15,\n                \"Imgs\": [\n                    {\n                        \"id\": 3,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\ec066480-54b5-4a3c-8c2c-a446fc47135e@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  2\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 17,\n                \"Imgs\": [\n                    {\n                        \"id\": 4,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\6ac24d37-0179-49e5-91d1-0ca0464c8776@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  3\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 18,\n                \"Imgs\": [\n                    {\n                        \"id\": 5,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\d08655c4-ddfa-4be7-af63-82219796c55d@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  4\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 19,\n                \"Imgs\": [\n                    {\n                        \"id\": 6,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\86ead505-fec9-45cf-818a-73c7ed1eb388@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  5\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 21,\n                \"Imgs\": [\n                    {\n                        \"id\": 7,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\32be383a-6e09-485a-bc4f-f622cca273ec@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  6\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 22,\n                \"Imgs\": [\n                    {\n                        \"id\": 8,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\9a1e8fd5-ac38-4d92-8005-54ba5fb080c2@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            },\n            {\n                \"title\": \"titulo  7\",\n                \"descript\": \"descriccion compelta\",\n                \"votes\": 0,\n                \"id\": 23,\n                \"Imgs\": [\n                    {\n                        \"id\": 9,\n                        \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\87cbed62-f94c-4b40-bc1d-fc14e56ea7b8@Hip_Script_Etsy_Shop_Icon.png\",\n                        \"format\": \"image/png\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "eliminar una eleccion por id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+								"description": "token",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/v1/elections/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"elections",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "eliminar una eleccion por id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+										"description": "token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/elections/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"elections",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "32"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Dec 2021 19:10:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Eleccion eliminada\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Options",
+			"item": [
+				{
+					"name": "crear opcion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "titulo  7",
+									"description": "text y es unico",
+									"type": "text"
+								},
+								{
+									"key": "descript",
+									"value": "descriccion compelta",
+									"description": "text",
+									"type": "text"
+								},
+								{
+									"key": "election",
+									"value": "1",
+									"description": "id de la eleccion",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/C:/Users/noteb/Dropbox/My PC (DESKTOP-TUHIIIT)/Pictures/Hip Script Etsy Shop Icon.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/v1/options",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"options"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "crear opcion",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "titulo  7",
+											"description": "text y es unico",
+											"type": "text"
+										},
+										{
+											"key": "descript",
+											"value": "descriccion compelta",
+											"description": "text",
+											"type": "text"
+										},
+										{
+											"key": "election",
+											"value": "1",
+											"description": "id de la eleccion",
+											"type": "text"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": "/C:/Users/noteb/Dropbox/My PC (DESKTOP-TUHIIIT)/Pictures/Hip Script Etsy Shop Icon.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:5000/v1/options",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"options"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "316"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Dec 2021 18:32:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"opciones creada\",\n    \"info\": {\n        \"title\": \"titulo  7\",\n        \"descript\": \"descriccion compelta\",\n        \"votes\": 0,\n        \"id\": 23,\n        \"Imgs\": [\n            {\n                \"id\": 9,\n                \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\87cbed62-f94c-4b40-bc1d-fc14e56ea7b8@Hip_Script_Etsy_Shop_Icon.png\",\n                \"format\": \"image/png\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "todas las opciones",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+								"description": "token",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/v1/options",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"options"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "todas las opciones",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+										"description": "token",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/v1/options",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"v1",
+										"options"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "Origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "2825"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Dec 2021 18:31:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"todos los Optiones\",\n    \"info\": [\n        {\n            \"title\": \"titulo de test 6\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 12,\n            \"Imgs\": [\n                {\n                    \"id\": 1,\n                    \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\0e0e6fdc-40b5-444e-8c43-2358fdcdb81e@Hip_Script_Etsy_Shop_Icon.png\",\n                    \"format\": \"image/png\"\n                }\n            ]\n        },\n        {\n            \"title\": \"titulo \",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 14,\n            \"Imgs\": [\n                {\n                    \"id\": 2,\n                    \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\d78c5cd5-5a26-485d-9d7b-04485c8a66b7@Hip_Script_Etsy_Shop_Icon.png\",\n                    \"format\": \"image/png\"\n                }\n            ]\n        },\n        {\n            \"title\": \"titulo  1\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 15,\n            \"Imgs\": [\n                {\n                    \"id\": 3,\n                    \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\ec066480-54b5-4a3c-8c2c-a446fc47135e@Hip_Script_Etsy_Shop_Icon.png\",\n                    \"format\": \"image/png\"\n                }\n            ]\n        },\n        {\n            \"title\": \"titulo  2\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 17,\n            \"Imgs\": [\n                {\n                    \"id\": 4,\n                    \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\6ac24d37-0179-49e5-91d1-0ca0464c8776@Hip_Script_Etsy_Shop_Icon.png\",\n                    \"format\": \"image/png\"\n                }\n            ]\n        },\n        {\n            \"title\": \"titulo  3\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 18,\n            \"Imgs\": [\n                {\n                    \"id\": 5,\n                    \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\d08655c4-ddfa-4be7-af63-82219796c55d@Hip_Script_Etsy_Shop_Icon.png\",\n                    \"format\": \"image/png\"\n                }\n            ]\n        },\n        {\n            \"title\": \"titulo  4\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 19,\n            \"Imgs\": [\n                {\n                    \"id\": 6,\n                    \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\86ead505-fec9-45cf-818a-73c7ed1eb388@Hip_Script_Etsy_Shop_Icon.png\",\n                    \"format\": \"image/png\"\n                }\n            ]\n        },\n        {\n            \"title\": \"titulo  5\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 21,\n            \"Imgs\": [\n                {\n                    \"id\": 7,\n                    \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\32be383a-6e09-485a-bc4f-f622cca273ec@Hip_Script_Etsy_Shop_Icon.png\",\n                    \"format\": \"image/png\"\n                }\n            ]\n        },\n        {\n            \"title\": \"titulo  6\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 22,\n            \"Imgs\": [\n                {\n                    \"id\": 8,\n                    \"path\": \"C:\\\\Users\\\\noteb\\\\Dropbox\\\\My PC (DESKTOP-TUHIIIT)\\\\Documents\\\\GitHub\\\\api-server\\\\static\\\\9a1e8fd5-ac38-4d92-8005-54ba5fb080c2@Hip_Script_Etsy_Shop_Icon.png\",\n                    \"format\": \"image/png\"\n                }\n            ]\n        },\n        {\n            \"title\": \"titulo de test 5\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 11,\n            \"Imgs\": []\n        },\n        {\n            \"title\": \"titulo de test 1\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 5,\n            \"Imgs\": []\n        },\n        {\n            \"title\": \"titulo de test 3\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 8,\n            \"Imgs\": []\n        },\n        {\n            \"title\": \"titulo de test\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 1,\n            \"Imgs\": []\n        },\n        {\n            \"title\": \"titulo de test 4\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 9,\n            \"Imgs\": []\n        },\n        {\n            \"title\": \"titulo de test 2\",\n            \"descript\": \"descriccion compelta\",\n            \"votes\": 0,\n            \"id\": 7,\n            \"Imgs\": []\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "todos los roles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAxNTE3OH0.lEwGUcLvNXwovHGStgkxSXMLfMLRKsuhSPznnOvVKQk",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/v1/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
