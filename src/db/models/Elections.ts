@@ -34,6 +34,9 @@ export default class Elections {
 	@JoinColumn()
 	public Options?: Options[];
 
+	@Column({ default: true })
+	public active?: boolean;
+
 	@CreateDateColumn()
 	@IsDate()
 	public createdAt!: Date;

@@ -18,7 +18,12 @@ export default class Election_Status {
 				.count()
 				.then((n) => {
 					if (!n) {
-						getRepository(Election_Status).save([{ name: 'proponer' }, { name: 'votantar' }, { name: 'revisar' }]);
+						getRepository(Election_Status).save([
+							{ name: 'proponer' },
+							{ name: 'votantar' },
+							{ name: 'revisar' },
+							{ name: 'finalizar' },
+						]);
 					}
 				});
 		}, 9000);

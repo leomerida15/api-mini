@@ -15,7 +15,6 @@ import R_User_Options from './R_User_Options';
 import Imgs from './Imgs';
 import { ManyToMany } from 'typeorm';
 
-
 @Entity()
 export default class Options {
 	@PrimaryGeneratedColumn()
@@ -32,6 +31,12 @@ export default class Options {
 	@Min(0)
 	votes!: number;
 
+	@Column({ name: 'id_creator' })
+	public creator!: number;
+
+	@Column({ name: 'status', default: false })
+	public status!: boolean;
+
 	@ManyToOne(() => Elections, (Elections) => Elections.Options, {
 		cascade: ['insert', 'update'],
 	})
@@ -39,13 +44,13 @@ export default class Options {
 	public election!: number | Elections[];
 
 	@ManyToMany(() => Imgs, {
-		cascade: ['insert', 'update', 'remove']
+		cascade: ['insert', 'update', 'remove'],
 	})
 	@JoinTable({ name: 'R_Img_Options', joinColumn: { name: 'id_option' }, inverseJoinColumn: { name: 'id_img' } })
 	public Imgs?: Imgs[];
 
 	@OneToMany(() => R_User_Options, (R_User_Options) => R_User_Options.Option, {
-		cascade: ['remove']
+		cascade: ['remove'],
 	})
 	@JoinColumn({ name: 'Users' })
 	public Users?: R_User_Options[];

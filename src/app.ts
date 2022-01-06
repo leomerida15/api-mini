@@ -14,9 +14,6 @@ const start = async (): Promise<FastifyInstance> => {
 		// ? levantando DB
 		const resp = await createConnection();
 
-		resp.entityMetadatas.forEach((entity) => console.log(entity.name));
-		console.log(resp.options);
-
 		// ? levantando Router
 		Router(fastify);
 

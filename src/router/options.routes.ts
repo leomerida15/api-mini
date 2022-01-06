@@ -34,6 +34,8 @@ const Options_Routes: RouteOptions[] = [
 							.prop('election', S.number().minimum(1))
 							.prop('votes', S.number().minimum(0))
 							.prop('id', S.number().minimum(1))
+							.prop('creator', S.number().minimum(1))
+							.prop('status', S.boolean())
 							.prop(
 								'Imgs',
 								S.array()
@@ -68,6 +70,7 @@ const Options_Routes: RouteOptions[] = [
 									.prop('election', S.number().minimum(1))
 									.prop('votes', S.number().minimum(0))
 									.prop('id', S.number().minimum(1))
+									.prop('creator', S.number().minimum(1))
 									.prop(
 										'Imgs',
 										S.array()
@@ -102,6 +105,8 @@ const Options_Routes: RouteOptions[] = [
 							.prop('election', S.number().minimum(1))
 							.prop('votes', S.number().minimum(0))
 							.prop('id', S.number().minimum(1))
+							.prop('creator', S.number().minimum(1))
+							.prop('status', S.boolean())
 							.prop('imgs', S.array().items(S.number().minimum(1)))
 					)
 			),
@@ -123,6 +128,7 @@ const Options_Routes: RouteOptions[] = [
 						.prop('election', S.number().minimum(1))
 						.prop('votes', S.number().minimum(0))
 						.prop('id', S.number().minimum(1))
+						.prop('status', S.boolean())
 						.prop('imgsDeletes', S.array().items(S.number().minimum(1)))
 						.prop(
 							'Imgs',
@@ -144,6 +150,8 @@ const Options_Routes: RouteOptions[] = [
 							.prop('election', S.number().minimum(1))
 							.prop('votes', S.number().minimum(0))
 							.prop('id', S.number().minimum(1))
+							.prop('creator', S.number().minimum(1))
+							.prop('status', S.boolean())
 							.prop('imgs', S.array().items(S.number().minimum(1)))
 					)
 			),

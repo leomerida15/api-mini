@@ -18,8 +18,10 @@ export const getElectionsById = async (
 ): Promise<FastifyReply | void> => {
 	const info = await getRepository('Elections').findOne({
 		where: { id: req.params.id },
-		relations: ['Options', 'Options.Imgs'],
+		relations: ['Options', 'Options.Imgs', 'status'],
 	});
+
+	if (!info) throw { message: 'la eleccion suministrada no existe', statusCode: 400 };
 
 	return reply.status(200).send({ message: 'Eleccion', info });
 };
@@ -29,13 +31,13 @@ export const getElectionsAll = async (
 		Body: Elections;
 	}>,
 	reply: FastifyReply
-): Promise<FastifyReply | void> => {
+): Promise<void> => {
 	const info = await getRepository('Elections').find({
-		relations: ['Options', 'Options.Imgs'],
+		relations: ['Options', 'Options.Imgs', 'status'],
 	});
 	if (!info.length) throw { message: 'no existen elecciones', statusCode: 400 };
 
-	return reply.status(200).send({ message: 'Elecciones', info });
+	reply.status(200).send({ message: 'Elecciones', info });
 };
 
 export const createElections = async (
@@ -44,9 +46,10 @@ export const createElections = async (
 	}>,
 	reply: FastifyReply
 ): Promise<FastifyReply | void> => {
-	const valid = await getRepository('Elections').count({ status: true });
+	const valid = await getRepository('Elections').count({ status: Not(4) });
 	if (valid) throw { message: 'ya existe una eleccion activa', statusCode: 400 };
 	//
+
 	const info = await getRepository('Elections').save(req.body);
 
 	await getRepository('Elections').update('*', { status: false });

@@ -25,7 +25,9 @@ export const createOptions = async (
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	const option = await getRepository('Options').save(req.body);
+	req.body.creator = JSON.parse(req.headers.authorization as any).id;
+
+	await getRepository('Options').save(req.body);
 	const info = await getRepository('Options').findOne({ where: { title: req.body.title }, relations: ['Imgs'] });
 
 	reply.status(200).send({ message: 'opciones creada', info });

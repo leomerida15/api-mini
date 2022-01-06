@@ -1,6 +1,6 @@
 import Users from '../db/models/Users';
 import fastify, { FastifyRequest, FastifyReply } from 'fastify';
-import { getRepository } from 'typeorm';
+import { getRepository, Not } from 'typeorm';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -54,5 +54,14 @@ export const login = async (
 
 	const { password, ...info } = user;
 
-	return reply.status(200).send({ message: 'usuario logeado', info, token });
+	const eleccion = (await getRepository('Elections').findOne({ where: { status: Not(4) } })) as any;
+
+	const propuestas = eleccion
+		? await getRepository('Options').find({
+				select: ['id'],
+				where: { election: eleccion.id },
+		  })
+		: [];
+
+	return reply.status(200).send({ message: 'usuario logeado', info, token, propuestas });
 };

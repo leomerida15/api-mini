@@ -58,6 +58,7 @@ const Auth: RouteOptions[] = [
 							.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
 							.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
 					)
+					.prop('propuestas', S.array().contains(S.object().prop('id', S.number())))
 			),
 		},
 		handler: login as RouteHandlerMethod,
