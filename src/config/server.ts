@@ -1,6 +1,7 @@
 import Fastify, { FastifyRequest } from 'fastify';
 import S, { ArraySchema, ObjectSchema } from 'fluent-json-schema';
 import validToken from './token';
+import jwt from 'jsonwebtoken';
 // import moduleName from 'fastify-jwt'
 
 import multer from 'fastify-multer'; // or import multer from 'fastify-multer'
@@ -23,8 +24,8 @@ fastify.register(require('fastify-cors'), {
 });
 
 fastify.register(require('fastify-jwt'), {
-	secret: 'nojodas'
-})
+	secret: 'nojodas',
+});
 
 /**
  * se define el manejador de errores
@@ -48,9 +49,8 @@ fastify.addHook('onRequest', (req, reply, done) => {
 
 		if (validToken(req.url)) {
 			if (!authorization) throw { message: 'no esta autorisado', statusCode: 403 };
-			console.log(req.jwtVerify());
 
-			req.headers.authorization = JSON.stringify(fastify.jwt.verify(authorization));
+			req.headers.authorization = JSON.stringify(jwt.verify(authorization, 'nojodas'));
 		}
 
 		done();
