@@ -41,7 +41,7 @@ export default class Options {
 		cascade: ['insert', 'update'],
 	})
 	@JoinColumn({ name: 'id_election' })
-	public election!: number | Elections[];
+	public election!: Elections | number;
 
 	@ManyToMany(() => Imgs, {
 		cascade: ['insert', 'update', 'remove'],

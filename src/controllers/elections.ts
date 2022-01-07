@@ -95,11 +95,15 @@ export const voteOptionToElection = async (
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	const option = (await getRepository('Options').findOne(req.params.id_option)) as Options | undefined;
+	const option = (await getRepository('Options').findOne({
+		where: { id: req.params.id_option },
+		relations: ['Imgs', 'Elections'],
+	})) as Options | undefined;
 	if (!option) throw { message: 'no existe la opcion', statusCode: 400 };
 
 	const token = JSON.parse(req.headers.authorization);
 	let info;
+	let message;
 
 	const valid = await getRepository('R_User_Options').count({
 		id_user: token.id,
@@ -113,6 +117,7 @@ export const voteOptionToElection = async (
 		});
 
 		info = await getRepository('Options').update(req.params.id_option, { votes: option.votes + 1 });
+		message = 'su voto fue efectuado con exito';
 	} else if (valid === 1) {
 		await getRepository('R_User_Options').delete({
 			id_user: token.id,
@@ -120,7 +125,8 @@ export const voteOptionToElection = async (
 		});
 
 		info = await getRepository('Options').update(req.params.id_option, { votes: option.votes - 1 });
+		message = 'su voto fue cancelado con exito';
 	}
 
-	reply.status(200).send({ message: 'su voto fue exitoso', info });
+	reply.status(200).send({ message, info });
 };

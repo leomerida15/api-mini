@@ -1,6 +1,7 @@
 import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Users from './Users';
 import Options from './Options';
+import Elections from './Elections';
 
 @Entity()
 export default class R_User_Options {
