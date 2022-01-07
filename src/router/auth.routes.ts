@@ -1,6 +1,7 @@
 import { RouteHandlerMethod, RouteOptions } from 'fastify';
 import { register, login } from '../controllers/auth';
 import S from 'fluent-json-schema';
+import schemas from './schemas';
 import { Resp } from '../config/server';
 
 const Auth: RouteOptions[] = [
@@ -48,17 +49,9 @@ const Auth: RouteOptions[] = [
 				S.object()
 					.prop('message', S.string().required())
 					.prop('token', S.string().required())
-					.prop(
-						'info',
-						S.object()
-							.prop('id', S.number())
-							.prop('name', S.string())
-							.prop('email', S.string())
-							.prop('roles', S.array().contains(S.object().prop('Rol', S.number())))
-							.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
-							.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
-					)
-					.prop('propuestas', S.array().contains(S.object().prop('id', S.number())))
+					.prop('info', schemas.login)
+					.prop('option', schemas.option)
+					.prop('election', schemas.election)
 			),
 		},
 		handler: login as RouteHandlerMethod,

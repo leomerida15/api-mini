@@ -79,11 +79,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "578"
+									"value": "815"
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 06 Jan 2022 22:03:07 GMT"
+									"value": "Fri, 07 Jan 2022 13:54:49 GMT"
 								},
 								{
 									"key": "Connection",
@@ -95,7 +95,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"usuario logeado\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiUHJvcG9uZW50ZSJ9LHsiaWQiOjMsIm5hbWUiOiJWb3RhbnRlIn0seyJpZCI6NCwibmFtZSI6IlJldmlzb3IifV0sImVtYWlsIjoiY2FybG9zamdyOEBnbWFpbC5jb20iLCJpYXQiOjE2NDE1MDY1ODZ9.0nYOiguZQXiSTqm7taQ0VjqOEcDPgQGt98hvTwGoPJE\",\n    \"info\": {\n        \"id\": 2,\n        \"name\": \"Carlos Gonzalez\",\n        \"email\": \"carlosjgr8@gmail.com\",\n        \"roles\": [\n            {\n                \"id\": 1,\n                \"name\": \"Admin\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Proponente\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Votante\"\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Revisor\"\n            }\n        ]\n    },\n    \"propuestas\": [\n        {\n            \"id\": 2\n        },\n        {\n            \"id\": 3\n        },\n        {\n            \"id\": 4\n        }\n    ]\n}"
+							"body": "{\n    \"message\": \"usuario logeado\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiUHJvcG9uZW50ZSJ9LHsiaWQiOjMsIm5hbWUiOiJWb3RhbnRlIn0seyJpZCI6NCwibmFtZSI6IlJldmlzb3IifV0sImVtYWlsIjoiY2FybG9zamdyOEBnbWFpbC5jb20iLCJpYXQiOjE2NDE1NjM2ODl9.bH6rn5sLAQ0WptZlA8WiKPw4ynxjNX4Wx4rJ_wiqz_M\",\n    \"info\": {\n        \"id\": 2,\n        \"name\": \"Carlos Gonzalez\",\n        \"email\": \"carlosjgr8@gmail.com\",\n        \"roles\": [\n            {\n                \"id\": 1,\n                \"name\": \"Admin\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Proponente\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Votante\"\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Revisor\"\n            }\n        ]\n    },\n    \"option\": {\n        \"title\": \"titulo  45sd\",\n        \"descript\": \"descriccion compelta\",\n        \"votes\": 0,\n        \"id\": 2,\n        \"creator\": 2,\n        \"status\": false\n    },\n    \"election\": {\n        \"id\": 2,\n        \"name\": \"test de Eleccion test\",\n        \"deleteAt\": \"2022-01-14T01:21:48.224Z\",\n        \"createdAt\": \"2022-01-07T01:22:04.556Z\",\n        \"updatedAt\": \"2022-01-07T01:22:04.556Z\"\n    }\n}"
 						}
 					]
 				},

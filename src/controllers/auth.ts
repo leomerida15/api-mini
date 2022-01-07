@@ -33,7 +33,7 @@ export const login = async (
 		Body: Users;
 	}>,
 	reply: FastifyReply
-): Promise<FastifyReply | void> => {
+): Promise<void> => {
 	//
 	const { email } = req.body;
 
@@ -54,14 +54,16 @@ export const login = async (
 
 	const { password, ...info } = user;
 
-	const eleccion = (await getRepository('Elections').findOne({ where: { status: Not(4) } })) as any;
+	const election =
+		((await getRepository('Elections').findOne({
+			where: { status: Not(4) },
+		})) as any | undefined) ?? {};
 
-	const propuestas = eleccion
-		? await getRepository('Options').find({
-				select: ['id'],
-				where: { election: eleccion.id },
+	const option = election
+		? await getRepository('Options').findOne({
+				where: { election: election.id },
 		  })
-		: [];
+		: {};
 
-	return reply.status(200).send({ message: 'usuario logeado', info, token, propuestas });
+	reply.status(200).send({ message: 'usuario logeado', info, token, option, election });
 };
