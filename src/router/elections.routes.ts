@@ -1,5 +1,6 @@
 import { RouteHandlerMethod, RouteOptions } from 'fastify';
 import S from 'fluent-json-schema';
+import schemas from './schemas';
 import { Resp } from '../config/server';
 import {
 	createElections,
@@ -38,48 +39,7 @@ const Elections_Routes: RouteOptions[] = [
 		url: '/elections',
 		schema: {
 			response: Resp(
-				S.object()
-					.prop('message', S.string())
-					.prop(
-						'info',
-						S.array()
-							.minItems(0)
-							.contains(
-								S.object()
-									.prop('id', S.number())
-									.prop('name', S.string())
-									.prop('status', S.object().prop('id', S.number()).prop('name', S.string()))
-									.prop('deleteAt', S.raw({ type: 'date', format: 'date' }))
-									.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
-									.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
-									.prop(
-										'Options',
-										S.array()
-											.minItems(0)
-											.items(
-												S.object()
-													.prop('title', S.string().required())
-													.prop('descript', S.string().required())
-													.prop('election', S.number().minimum(1))
-													.prop('votes', S.number().minimum(0))
-													.prop('id', S.number().minimum(1))
-													.prop('creator', S.number().minimum(1))
-													.prop('status', S.boolean())
-													.prop(
-														'Imgs',
-														S.array()
-															.minItems(0)
-															.items(
-																S.object()
-																	.prop('id', S.number().minimum(1))
-																	.prop('path', S.string())
-																	.prop('format', S.string())
-															)
-													)
-											)
-									)
-							)
-					)
+				S.object().prop('message', S.string()).prop('info', S.array().minItems(0).items(schemas.election))
 			),
 		},
 		handler: getElectionsAll as RouteHandlerMethod,
@@ -89,47 +49,8 @@ const Elections_Routes: RouteOptions[] = [
 		url: '/elections/:id',
 		schema: {
 			params: S.object().prop('id', S.string().required()),
-			response: Resp(
-				S.object()
-					.prop('message', S.string())
-					.prop(
-						'info',
 
-						S.object()
-							.prop('id', S.number())
-							.prop('name', S.string())
-							.prop('status', S.object().prop('id', S.number()).prop('name', S.string()))
-							.prop('deleteAt', S.raw({ type: 'date', format: 'date' }))
-							.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
-							.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
-							.prop(
-								'Options',
-								S.array()
-									.minItems(0)
-									.items(
-										S.object()
-											.prop('title', S.string().required())
-											.prop('descript', S.string().required())
-											.prop('election', S.number().minimum(1))
-											.prop('votes', S.number().minimum(0))
-											.prop('id', S.number().minimum(1))
-											.prop('creator', S.number().minimum(1))
-											.prop('status', S.boolean())
-											.prop(
-												'Imgs',
-												S.array()
-													.minItems(0)
-													.items(
-														S.object()
-															.prop('id', S.number().minimum(1))
-															.prop('path', S.string())
-															.prop('format', S.string())
-													)
-											)
-									)
-							)
-					)
-			),
+			response: Resp(S.object().prop('message', S.string()).prop('info', schemas.election)),
 		},
 		handler: getElectionsById as RouteHandlerMethod,
 	},
@@ -144,46 +65,7 @@ const Elections_Routes: RouteOptions[] = [
 
 			params: S.object().prop('id_election', S.string().required()),
 
-			response: Resp(
-				S.object()
-					.prop('message', S.string())
-					.prop(
-						'info',
-						S.object()
-							.prop('id', S.number())
-							.prop('name', S.string())
-							.prop('status', S.object().prop('id', S.number()).prop('name', S.string()))
-							.prop('deleteAt', S.raw({ type: 'date', format: 'date' }))
-							.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
-							.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
-							.prop(
-								'Options',
-								S.array()
-									.minItems(0)
-									.items(
-										S.object()
-											.prop('title', S.string().required())
-											.prop('descript', S.string().required())
-											.prop('election', S.number().minimum(1))
-											.prop('votes', S.number().minimum(0))
-											.prop('id', S.number().minimum(1))
-											.prop('creator', S.number().minimum(1))
-											.prop('status', S.boolean())
-											.prop(
-												'Imgs',
-												S.array()
-													.minItems(0)
-													.items(
-														S.object()
-															.prop('id', S.number().minimum(1))
-															.prop('path', S.string())
-															.prop('format', S.string())
-													)
-											)
-									)
-							)
-					)
-			),
+			response: Resp(S.object().prop('message', S.string()).prop('info', schemas.election)),
 		},
 		handler: editElectionsById as RouteHandlerMethod,
 	},

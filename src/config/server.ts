@@ -2,6 +2,7 @@ import Fastify, { FastifyRequest } from 'fastify';
 import S, { ArraySchema, ObjectSchema } from 'fluent-json-schema';
 import validToken from './token';
 import jwt from 'jsonwebtoken';
+import path from 'path';
 // import moduleName from 'fastify-jwt'
 
 import multer from 'fastify-multer'; // or import multer from 'fastify-multer'
@@ -63,6 +64,11 @@ fastify.addHook('onRequest', (req, reply, done) => {
 fastify.register(multer.contentParser);
 
 fastify.register(require('fastify-response-validation'));
+
+fastify.register(require('fastify-static'), {
+	root: path.resolve('static'),
+	prefix: '/static/', // optional: default '/'
+});
 
 export const Resp = (obj?: ObjectSchema | ArraySchema): unknown => {
 	const resp: unknown = {
