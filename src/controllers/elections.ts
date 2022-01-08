@@ -1,11 +1,12 @@
 import Users from '../db/models/Users';
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { getRepository, Not } from 'typeorm';
+import { getRepository, Not, In } from 'typeorm';
 import Elections from '../db/models/Elections';
 import Msg from '../hooks/messages';
 import { FastifyJWT } from 'fastify-jwt';
 import HookHandlerDoneFunction from 'fastify';
 import Options from '../db/models/Options';
+import R_User_Options from 'db/models/R_User_Options';
 
 export const getElectionsById = async (
 	req: FastifyRequest<{
@@ -95,19 +96,28 @@ export const voteOptionToElection = async (
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
+	const election = (await getRepository('Elections').findOne({
+		where: { id: req.params.id_election },
+		relations: ['Options'],
+	})) as Elections | undefined;
+
 	const option = (await getRepository('Options').findOne({
 		where: { id: req.params.id_option },
 		relations: ['Imgs', 'Elections'],
 	})) as Options | undefined;
-	if (!option) throw { message: 'no existe la opcion', statusCode: 400 };
+
+	if (!option || !election) throw { message: 'la opcion o la eleccion suministradas no existe', statusCode: 400 };
+
+	const ids_options = election.Options!
+		// .filter((item) => option.id === item.id)
+		.map((option) => option.id);
 
 	const token = JSON.parse(req.headers.authorization);
 	let info;
-	let message;
 
 	const valid = await getRepository('R_User_Options').count({
 		id_user: token.id,
-		id_option: req.params.id_option,
+		id_option: In(ids_options),
 	});
 
 	if (!valid) {
@@ -117,16 +127,25 @@ export const voteOptionToElection = async (
 		});
 
 		info = await getRepository('Options').update(req.params.id_option, { votes: option.votes + 1 });
-		message = 'su voto fue efectuado con exito';
-	} else if (valid === 1) {
-		await getRepository('R_User_Options').delete({
-			id_user: token.id,
-			id_option: req.params.id_option,
-		});
+	} else if (valid) {
+		const valid = await getRepository('R_User_Options').findOne({
+			where: {
+				id_user: token.id,
+				id_option: In(ids_options),
+			},
+			relations: ['Option'],
+		}) as R_User_Options;
 
-		info = await getRepository('Options').update(req.params.id_option, { votes: option.votes - 1 });
-		message = 'su voto fue cancelado con exito';
+		const { id: id_option, votes } = valid.Option as Options;
+
+		if (`${id_option}` === req.params.id_option) throw { message: 'ya voto por esta opcion', statusCode: 400 };
+
+		await getRepository('R_User_Options').update(valid.id, { id_option: req.params.id_option });
+
+		await getRepository('Options').update(id_option, { votes: votes - 1 });
+
+		info = await getRepository('Options').update(req.params.id_option, { votes: votes + 1 });
 	}
 
-	reply.status(200).send({ message, info });
+	reply.status(200).send({ message: 'su voto fue efectuado con exito', info });
 };
