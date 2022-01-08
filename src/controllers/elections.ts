@@ -98,53 +98,57 @@ export const voteOptionToElection = async (
 ): Promise<void> => {
 	const election = (await getRepository('Elections').findOne({
 		where: { id: req.params.id_election },
-		relations: ['Options'],
+		relations: ['Options', 'Options.Imgs'],
 	})) as Elections | undefined;
 
 	const option = (await getRepository('Options').findOne({
 		where: { id: req.params.id_option },
-		relations: ['Imgs', 'Elections'],
+		relations: ['Imgs'],
 	})) as Options | undefined;
 
 	if (!option || !election) throw { message: 'la opcion o la eleccion suministradas no existe', statusCode: 400 };
 
 	const ids_options = election.Options!
-		// .filter((item) => option.id === item.id)
+		// 	// .filter((item) => option.id === item.id)
 		.map((option) => option.id);
 
 	const token = JSON.parse(req.headers.authorization);
 	let info;
 
 	const valid = await getRepository('R_User_Options').count({
-		id_user: token.id,
-		id_option: In(ids_options),
+		User: token.id,
+		Option: In(ids_options),
 	});
 
 	if (!valid) {
 		await getRepository('R_User_Options').save({
-			id_user: token.id,
-			id_option: req.params.id_option,
+			User: token.id,
+			Option: req.params.id_option,
 		});
 
 		info = await getRepository('Options').update(req.params.id_option, { votes: option.votes + 1 });
 	} else if (valid) {
 		const valid = await getRepository('R_User_Options').findOne({
 			where: {
-				id_user: token.id,
-				id_option: In(ids_options),
+				User: token.id,
+				Option: In(ids_options),
 			},
 			relations: ['Option'],
 		}) as R_User_Options;
 
 		const { id: id_option, votes } = valid.Option as Options;
 
+		console.log('id_option', id_option);
+		console.log('req.params.id_option', req.params.id_option);
+
+
 		if (`${id_option}` === req.params.id_option) throw { message: 'ya voto por esta opcion', statusCode: 400 };
 
-		await getRepository('R_User_Options').update(valid.id, { id_option: req.params.id_option });
+		await getRepository('R_User_Options').update(valid.id, { Option: req.params.id_option });
 
 		await getRepository('Options').update(id_option, { votes: votes - 1 });
 
-		info = await getRepository('Options').update(req.params.id_option, { votes: votes + 1 });
+		info = await getRepository('Options').update(req.params.id_option, { votes: option.votes + 1 });
 	}
 
 	reply.status(200).send({ message: 'su voto fue efectuado con exito', info });

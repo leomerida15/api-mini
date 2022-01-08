@@ -119,24 +119,19 @@ const Options_Routes: RouteOptions[] = [
 		schema: {
 			params: S.object().prop('id_option', S.string().required()),
 			body: S.object()
-				.prop('message', S.string())
+				.prop('title', S.string())
+				.prop('descript', S.string())
+				.prop('election', S.number().minimum(1))
+				.prop('votes', S.number().minimum(0))
+				.prop('id', S.number().minimum(1))
+				.prop('creator', S.number().minimum(1))
+				.prop('status', S.boolean())
 				.prop(
-					'info',
-					S.object()
-						.prop('title', S.string().required())
-						.prop('descript', S.string().required())
-						.prop('election', S.number().minimum(1))
-						.prop('votes', S.number().minimum(0))
-						.prop('id', S.number().minimum(1))
-						.prop('status', S.boolean())
-						.prop('imgsDeletes', S.array().items(S.number().minimum(1)))
-						.prop(
-							'Imgs',
-							S.array()
-								.minItems(0)
-								.items(
-									S.object().prop('id', S.number().minimum(1)).prop('path', S.string()).prop('format', S.string())
-								)
+					'Imgs',
+					S.array()
+						.minItems(0)
+						.items(
+							S.object().prop('id', S.number().minimum(1)).prop('path', S.string()).prop('format', S.string())
 						)
 				),
 			response: Resp(

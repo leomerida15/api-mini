@@ -69,5 +69,5 @@ export const editOptions = async (
 	await getRepository('Options').update(req.params.id_option, req.body);
 	const info = await getRepository('Options').findOne({ where: { title: req.body.title }, relations: ['Imgs'] });
 
-	reply.status(200).send({ message: 'opciones creada', info });
+	reply.status(200).send({ message: 'opciones editada', info });
 };
