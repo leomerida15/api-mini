@@ -21,18 +21,27 @@ const election = S.object()
 	.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('Options', S.array().minItems(0).items(option));
 
+const roles = S.object().prop('Rol', S.number())
+
 const login = S.object()
 	.prop('id', S.number())
 	.prop('name', S.string())
 	.prop('email', S.string())
-	.prop('roles', S.array().contains(S.object().prop('Rol', S.number())))
+	.prop('roles', S.array().items(roles))
 	.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('updatedAt', S.raw({ type: 'date', format: 'date' }));
+
+const users = S.object()
+	.prop('id', S.number())
+	.prop('name', S.string())
+	.prop('email', S.string())
+	.prop('roles', S.array().items(roles))
 
 const SchoemaObject = {
 	election,
 	option,
 	login,
+	users
 };
 
 export default SchoemaObject;

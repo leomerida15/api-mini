@@ -59,13 +59,6 @@ const Auth: RouteOptions[] = [
 	{
 		method: 'GET',
 		url: '/users',
-		schema: {
-			response: Resp(
-				S.object()
-					.prop('message', S.string().required())
-					.prop('info', schemas.login)
-			),
-		},
 		handler: getUsers as RouteHandlerMethod,
 	},
 ];

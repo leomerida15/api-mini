@@ -80,5 +80,6 @@ export const getUsers = async (
 		relations: ['roles'],
 	})) as Users[];
 
+
 	reply.status(200).send({ message: 'usuarios', info });
 };
