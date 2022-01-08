@@ -1,5 +1,5 @@
 import { RouteHandlerMethod, RouteOptions } from 'fastify';
-import { register, login } from '../controllers/auth';
+import { register, login, getUsers } from '../controllers/auth';
 import S from 'fluent-json-schema';
 import schemas from './schemas';
 import { Resp } from '../config/server';
@@ -55,6 +55,18 @@ const Auth: RouteOptions[] = [
 			),
 		},
 		handler: login as RouteHandlerMethod,
+	},
+	{
+		method: 'GET',
+		url: '/users',
+		schema: {
+			response: Resp(
+				S.object()
+					.prop('message', S.string().required())
+					.prop('info', schemas.login)
+			),
+		},
+		handler: getUsers as RouteHandlerMethod,
 	},
 ];
 

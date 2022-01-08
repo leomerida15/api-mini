@@ -61,9 +61,24 @@ export const login = async (
 
 	const option = election
 		? await getRepository('Options').findOne({
-				where: { election: election.id },
-		  })
+			where: { election: election.id },
+		})
 		: {};
 
 	reply.status(200).send({ message: 'usuario logeado', info, token, option, election });
+};
+
+export const getUsers = async (
+	req: FastifyRequest<{
+		Body: Users;
+	}>,
+	reply: FastifyReply
+): Promise<void> => {
+	//
+	const info = (await getRepository('Users').find({
+		select: ['id', 'name', 'email'],
+		relations: ['roles'],
+	})) as Users[];
+
+	reply.status(200).send({ message: 'usuarios', info });
 };
