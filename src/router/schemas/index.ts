@@ -27,7 +27,7 @@ const login = S.object()
 	.prop('id', S.number())
 	.prop('name', S.string())
 	.prop('email', S.string())
-	.prop('roles', S.array().items(roles))
+	.prop('roles', S.array().contains(roles))
 	.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('updatedAt', S.raw({ type: 'date', format: 'date' }));
 
@@ -35,7 +35,7 @@ const users = S.object()
 	.prop('id', S.number())
 	.prop('name', S.string())
 	.prop('email', S.string())
-	.prop('roles', S.array().items(roles))
+	.prop('roles', S.array().contains(roles))
 
 const SchoemaObject = {
 	election,
