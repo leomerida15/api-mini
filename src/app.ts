@@ -12,7 +12,7 @@ const start = async (): Promise<FastifyInstance> => {
 		const { NODE_ENV, PORT, HOST, PASSWORD, DATABASE }: any = process.env;
 
 		// ? levantando DB
-		const resp = await createConnection();
+		await createConnection();
 
 		// ? levantando Router
 		Router(fastify);

@@ -3,14 +3,15 @@ import S from 'fluent-json-schema';
 const imgs = S.object().prop('id', S.number().minimum(1)).prop('path', S.string()).prop('format', S.string());
 
 const option = S.object()
-	.prop('title', S.string().required())
-	.prop('descript', S.string().required())
+	.prop('title', S.string())
+	.prop('descript', S.string())
 	.prop('election', S.number().minimum(1))
 	.prop('votes', S.number().minimum(0))
 	.prop('id', S.number().minimum(1))
 	.prop('creator', S.number().minimum(1))
 	.prop('status', S.boolean())
-	.prop('Imgs', S.array().minItems(0).items(imgs));
+	.prop('Imgs', S.array().minItems(0).items(imgs))
+
 
 const election = S.object()
 	.prop('id', S.number())

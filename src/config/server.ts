@@ -7,7 +7,7 @@ import path from 'path';
 import multer from 'fastify-multer'; // or import multer from 'fastify-multer'
 
 const fastify = Fastify({
-	logger: true,
+	logger: false,
 	ajv: {
 		customOptions: {
 			coerceTypes: false,
