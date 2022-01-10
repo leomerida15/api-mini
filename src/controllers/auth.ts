@@ -1,8 +1,9 @@
 import Users from '../db/models/Users';
 import fastify, { FastifyRequest, FastifyReply } from 'fastify';
-import { getRepository, Not } from 'typeorm';
+import { getRepository, Not, In } from 'typeorm';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { Options } from 'multer';
 
 export const register = async (
 	req: FastifyRequest<{
@@ -57,15 +58,30 @@ export const login = async (
 	const election =
 		((await getRepository('Elections').findOne({
 			where: { status: Not(4) },
+			relations: ['Options'],
+
 		})) as any | undefined) ?? {};
 
-	const option = election
-		? await getRepository('Options').findOne({
-			where: { election: election.id },
-		})
-		: {};
+	let option: any = {};
 
-	reply.status(200).send({ message: 'usuario logeado', info, token, option, election });
+	let ids_options = election.Options?.map(({ id }: any) => id);
+
+	let vote: any = {};
+
+	if (election) {
+		option = await getRepository('Options').findOne({
+			where: { election: election.id, creator: user.id },
+		}) as Options | undefined ?? {}
+
+		let ids_options = election.Options!.map(({ id }: any) => id);
+
+		vote = await getRepository('R_User_Options').findOne({
+			where: { Option: In(ids_options), User: user.id },
+			relations: ['Option'],
+		}) as any | undefined ?? {};
+	}
+
+	reply.status(200).send({ message: 'usuario logeado', info, token, option, election, vote: vote.Option ? vote.Option : {} });
 };
 
 export const getUsers = async (
@@ -79,10 +95,6 @@ export const getUsers = async (
 		select: ['id', 'name', 'email'],
 		relations: ['roles'],
 	})) as Users[];
-
-	console.log('info', info);
-
-
 
 	reply.status(200).send({ message: 'usuarios', info });
 };

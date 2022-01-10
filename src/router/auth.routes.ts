@@ -52,6 +52,7 @@ const Auth: RouteOptions[] = [
 					.prop('info', schemas.login)
 					.prop('option', schemas.option)
 					.prop('election', schemas.election)
+					.prop('vote', schemas.option)
 			),
 		},
 		handler: login as RouteHandlerMethod,
