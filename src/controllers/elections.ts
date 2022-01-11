@@ -20,6 +20,7 @@ export const getElectionsById = async (
 	const info = await getRepository('Elections').findOne({
 		where: { id: req.params.id },
 		relations: ['Options', 'Options.Imgs', 'status'],
+		orderby: { Options: { id: 'DESC' } },
 	});
 
 	if (!info) throw { message: 'la eleccion suministrada no existe', statusCode: 400 };
@@ -46,7 +47,7 @@ export const createElections = async (
 		Body: Elections;
 	}>,
 	reply: FastifyReply
-): Promise<FastifyReply | void> => {
+): Promise<void> => {
 	const valid = await getRepository('Elections').count({ status: Not(4) });
 	if (valid) throw { message: 'ya existe una eleccion activa', statusCode: 400 };
 	//
@@ -64,11 +65,11 @@ export const removeElections = async (
 		Params: { id_election: string };
 	}>,
 	reply: FastifyReply
-): Promise<FastifyReply | void> => {
+): Promise<void> => {
 	//
 	await getRepository('Elections').delete(req.params.id_election);
 
-	return reply.status(200).send({ message: 'Eleccion eliminada' });
+	reply.status(200).send({ message: 'Eleccion eliminada' });
 };
 
 export const editElectionsById = async (
@@ -76,8 +77,7 @@ export const editElectionsById = async (
 		Body: Elections;
 		Params: { id_election: string };
 	}>,
-	reply: FastifyReply,
-	done: any
+	reply: FastifyReply
 ): Promise<void> => {
 	await getRepository('Elections').update(req.params.id_election, req.body);
 
@@ -109,7 +109,6 @@ export const voteOptionToElection = async (
 	if (!option || !election) throw { message: 'la opcion o la eleccion suministradas no existe', statusCode: 400 };
 
 	const ids_options = election.Options!
-		// 	// .filter((item) => option.id === item.id)
 		.map((option) => option.id);
 
 	const token = JSON.parse(req.headers.authorization);
@@ -137,10 +136,6 @@ export const voteOptionToElection = async (
 		}) as R_User_Options;
 
 		const { id: id_option, votes } = valid.Option as Options;
-
-		console.log('id_option', id_option);
-		console.log('req.params.id_option', req.params.id_option);
-
 
 		if (`${id_option}` === req.params.id_option) throw { message: 'ya voto por esta opcion', statusCode: 400 };
 

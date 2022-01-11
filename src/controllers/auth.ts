@@ -4,6 +4,8 @@ import { getRepository, Not, In } from 'typeorm';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { Options } from 'multer';
+import mailMsg from '../hooks/mail';
+import { mailer } from '../hooks/mail/index';
 
 export const register = async (
 	req: FastifyRequest<{
@@ -97,4 +99,44 @@ export const getUsers = async (
 	})) as Users[];
 
 	reply.status(200).send({ message: 'usuarios', info });
+};
+
+export const newPass = async (
+	req: FastifyRequest<{
+		Body: Users;
+	}>,
+	reply: FastifyReply
+): Promise<void> => {
+	console.log('req', req.body);
+
+	const { email } = req.body;
+	const user = (await getRepository('Users').findOne({ email }) as Users | undefined);
+	if (!user) throw { message: 'el correo suministrado no existe', code: 400 };
+
+	// const password = 
+	const randon = Math.random().toString(36).slice(-8);
+	const password = await bcrypt.hash(randon, 12);
+
+	await getRepository('Users').update(user.id!, { password });
+
+	/** options of email */
+
+	mailer.verify((err, ok) => {
+		if (err) console.log(err);
+		else console.log(ok);
+
+	})
+
+	/** Shipping email */
+	const info = await mailer.sendMail({
+		from: 'Sabaneta',
+		to: email,
+		subject: 'Nueva contraseña',
+		html: mailMsg(user.name, randon),
+	});
+
+	console.log('info', info);
+
+
+	reply.status(200).send({ message: 'usuario logeado' });
 };
