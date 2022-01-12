@@ -12,9 +12,9 @@ export default class Rols {
 					if (!n) {
 						getRepository(Rols).save([
 							{ name: 'Admin' },
-							{ name: 'proponente' },
-							{ name: 'votante' },
-							{ name: 'revisor' },
+							{ name: 'Proponente' },
+							{ name: 'Votante' },
+							{ name: 'Revisor' },
 						]);
 					}
 				});

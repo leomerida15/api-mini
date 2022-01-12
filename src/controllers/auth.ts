@@ -101,14 +101,12 @@ export const getUsers = async (
 	reply.status(200).send({ message: 'usuarios', info });
 };
 
-export const newPass = async (
+export const newPassEmail = async (
 	req: FastifyRequest<{
 		Body: Users;
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	console.log('req', req.body);
-
 	const { email } = req.body;
 	const user = (await getRepository('Users').findOne({ email }) as Users | undefined);
 	if (!user) throw { message: 'el correo suministrado no existe', code: 400 };
@@ -119,14 +117,6 @@ export const newPass = async (
 
 	await getRepository('Users').update(user.id!, { password });
 
-	/** options of email */
-
-	// mailer.verify((err, ok) => {
-	// 	if (err) console.log(err);
-	// 	else console.log(ok);
-
-	// });
-
 	/** Shipping email */
 	const info = await mailer.sendMail({
 		from: 'dev@grandiose-pear.com',
@@ -135,8 +125,21 @@ export const newPass = async (
 		html: mailMsg(user.name, randon),
 	});
 
-	console.log('info', info);
+	reply.status(200).send({ message: 'Correo enviado' });
+};
 
 
-	reply.status(200).send({ message: 'usuario logeado' });
+
+export const newPass = async (
+	req: FastifyRequest<{
+		Body: Users;
+	}>,
+	reply: FastifyReply
+): Promise<void> => {
+	const { password } = req.body;
+	const token = JSON.parse(req.headers.authorization as string);
+
+	await getRepository('Users').update({ email: token.email }, { password });
+
+	reply.status(200).send({ message: 'contraseña editada' });
 };
