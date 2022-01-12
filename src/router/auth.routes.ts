@@ -71,7 +71,6 @@ const Auth: RouteOptions[] = [
 		url: '/auth/users/newPass',
 		schema: {
 			body: S.object()
-				.prop('email', S.string().format('email').required())
 				.prop('password', S.string().maxLength(12).minLength(8).required()),
 			response: Resp(),
 		},
