@@ -15,6 +15,7 @@ export default class Rols {
 							{ name: 'Proponente' },
 							{ name: 'Votante' },
 							{ name: 'Revisor' },
+							{ name: 'Bloqueado' },
 						]);
 					}
 				});

@@ -48,7 +48,8 @@ export const login = async (
 
 	if (!user) throw { message: 'el correo suministrado no existe', code: 400 };
 
-	const passValid = bcrypt.compare(req.body.password, user.password);
+	const passValid = await bcrypt.compare(req.body.password, user.password);
+
 	if (!passValid) throw { message: 'contraseña incorrecta' };
 
 	const { id, roles } = user;
@@ -136,8 +137,9 @@ export const newPass = async (
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	const { password } = req.body;
 	const token = JSON.parse(req.headers.authorization as string);
+
+	const password = await bcrypt.hash(req.body.password, 12);
 
 	await getRepository('Users').update({ email: token.email }, { password });
 
