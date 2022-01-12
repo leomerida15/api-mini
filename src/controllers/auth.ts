@@ -121,15 +121,15 @@ export const newPass = async (
 
 	/** options of email */
 
-	mailer.verify((err, ok) => {
-		if (err) console.log(err);
-		else console.log(ok);
+	// mailer.verify((err, ok) => {
+	// 	if (err) console.log(err);
+	// 	else console.log(ok);
 
-	})
+	// });
 
 	/** Shipping email */
 	const info = await mailer.sendMail({
-		from: 'Sabaneta',
+		from: 'dev@grandiose-pear.com',
 		to: email,
 		subject: 'Nueva contraseña',
 		html: mailMsg(user.name, randon),
