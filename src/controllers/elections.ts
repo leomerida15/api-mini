@@ -148,3 +148,16 @@ export const voteOptionToElection = async (
 
 	reply.status(200).send({ message: 'su voto fue efectuado con exito', info });
 };
+
+export const getUltimateElection = async (
+	req: FastifyRequest,
+	reply: FastifyReply
+): Promise<void> => {
+	const info = await getRepository('Elections').findOne({
+		relations: ['Options', 'Options.Imgs', 'status'],
+	});
+
+	if (!info) throw { message: 'no existe una eleccion activa', statusCode: 400 };
+
+	reply.status(200).send({ message: 'Ultima eleccion', info });
+}

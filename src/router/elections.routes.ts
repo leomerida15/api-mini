@@ -2,6 +2,7 @@ import { RouteHandlerMethod, RouteOptions } from 'fastify';
 import S from 'fluent-json-schema';
 import schemas from './schemas';
 import { Resp } from '../config/server';
+import { getUltimateElection } from '../controllers/elections';
 import {
 	createElections,
 	getElectionsAll,
@@ -43,6 +44,15 @@ const Elections_Routes: RouteOptions[] = [
 			),
 		},
 		handler: getElectionsAll as RouteHandlerMethod,
+	}, {
+		method: 'GET',
+		url: '/elections/ultimate',
+		schema: {
+			response: Resp(
+				S.object().prop('message', S.string()).prop('info', S.array().minItems(0).items(schemas.election))
+			),
+		},
+		handler: getUltimateElection as RouteHandlerMethod,
 	},
 	{
 		method: 'GET',

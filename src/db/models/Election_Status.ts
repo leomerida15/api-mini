@@ -22,7 +22,7 @@ export default class Election_Status {
 							{ name: 'proponer' },
 							{ name: 'votantar' },
 							{ name: 'revisar' },
-							{ name: 'finalizar' },
+							{ name: 'finalizada' },
 						]);
 					}
 				});
