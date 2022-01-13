@@ -51,10 +51,8 @@ export const createElections = async (
 	const valid = await getRepository('Elections').count({ status: Not(4) });
 	if (valid) throw { message: 'ya existe una eleccion activa', statusCode: 400 };
 	//
-
+	req.body.status = 1;
 	const info = await getRepository('Elections').save(req.body);
-
-	await getRepository('Elections').update('*', { status: false });
 
 	reply.status(200).send({ message: 'Eleccion creada', info });
 };
