@@ -61,7 +61,7 @@ export const login = async (
 	const election =
 		((await getRepository('Elections').findOne({
 			relations: ['Options', 'status'],
-			orderby: { createAt: 'DESC' },
+			orderby: { createAt: 'ASC' },
 		})) as any | undefined) ?? {};
 
 	let option: any = {};

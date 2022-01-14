@@ -49,7 +49,7 @@ const Elections_Routes: RouteOptions[] = [
 		url: '/elections/ultimate',
 		schema: {
 			response: Resp(
-				S.object().prop('message', S.string()).prop('info', S.array().minItems(0).items(schemas.election))
+				S.object().prop('message', S.string()).prop('info', schemas.election)
 			),
 		},
 		handler: getUltimateElection as RouteHandlerMethod,

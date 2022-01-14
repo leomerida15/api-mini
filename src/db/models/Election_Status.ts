@@ -19,10 +19,10 @@ export default class Election_Status {
 				.then((n) => {
 					if (!n) {
 						getRepository(Election_Status).save([
-							{ name: 'proponer' },
-							{ name: 'votantar' },
-							{ name: 'revisar' },
-							{ name: 'finalizada' },
+							{ name: 'Proponer' },
+							{ name: 'Votar' },
+							{ name: 'Revisar' },
+							{ name: 'Finalizada' },
 						]);
 					}
 				});
