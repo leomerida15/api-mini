@@ -71,7 +71,7 @@ const valid: preValidationHookHandler = (req, reply, done): void => {
 		...Format(req.body),
 		Imgs: files.map((img: any) => {
 			return {
-				path: path.join('static', img.filename),
+				path: path.join('/static', img.filename),
 				format: img.mimetype,
 			};
 		})
