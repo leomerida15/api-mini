@@ -1,13 +1,16 @@
 import Fastify, { FastifyRequest } from 'fastify';
 import S, { ArraySchema, ObjectSchema } from 'fluent-json-schema';
-import validToken from './token';
+import { validToken, validRolByToken } from './token';
 import jwt from 'jsonwebtoken';
 import path from 'path';
 
 import multer from 'fastify-multer'; // or import multer from 'fastify-multer'
 
 const fastify = Fastify({
-	logger: true,
+	logger: {
+		level: 'error',
+		prettyPrint: true,
+	},
 	ajv: {
 		customOptions: {
 			coerceTypes: false,
@@ -42,12 +45,19 @@ fastify.setErrorHandler(function (error, request, reply): void {
 // ? validar JWT
 fastify.addHook('onRequest', (req, reply, done) => {
 	try {
+
 		const { authorization } = req.headers;
 
 		if (validToken(req.url)) {
 			if (!authorization) throw { message: 'no esta autorisado', statusCode: 403 };
 
-			req.headers.authorization = JSON.stringify(jwt.verify(authorization, 'nojodas'));
+			const token: any = jwt.verify(authorization, 'nojodas');
+			req.headers.authorization = JSON.stringify(token);
+
+			const { routerPath, routerMethod } = req;
+
+			const validRols = validRolByToken(token.roles, { routerPath, routerMethod });
+			if (!validRols) throw { message: 'no esta autorisado', statusCode: 403 };
 		}
 
 		done();

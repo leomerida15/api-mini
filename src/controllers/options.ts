@@ -1,9 +1,10 @@
 import Users from '../db/models/Users';
 import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify';
-import { getRepository, In } from 'typeorm';
+import { getConnection, getRepository, In } from 'typeorm';
 import Options from '../db/models/Options';
 import path from 'path';
 import Msg from '../hooks/messages/index';
+import Imgs from '../db/models/Imgs';
 
 export const getOptions = async (
 	req: FastifyRequest<{
@@ -12,8 +13,6 @@ export const getOptions = async (
 	reply: FastifyReply
 ): Promise<any> => {
 	const info = (await getRepository('Options').find({ relations: ['Imgs'] })) as Options[];
-
-	// info.map((item) => console.log(item.Imgs))
 
 	reply.status(200).send({ message: Msg('Optione').getAll, info });
 };
@@ -33,13 +32,40 @@ export const createOptions = async (
 	reply.status(200).send({ message: 'opciones creada', info });
 };
 
-export const removeOption = async (
+export const addImgToOption = async (
 	req: FastifyRequest<{
-		Params: { id_option: string };
+		Params: { id: string };
+		Body: Options;
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	await getRepository('Options').delete(req.params.id_option);
+
+	const valid = await getRepository('Options').count({ where: { id: req.params.id } });
+	if (!valid) throw { message: 'no existe la opcion', statusCode: 400 };
+
+
+
+	const imgs = await getRepository('Imgs').save(req.body.Imgs!);
+
+
+	await getConnection().query(/*sql*/`
+
+	INSERT INTO public."R_Img_Options" (id_option, id_img) VALUES(${req.params.id}, ${imgs[0].id});
+
+	`);
+
+	const info = await getRepository('Options').findOne({ where: { id: req.params.id }, relations: ['Imgs'] });
+
+	reply.status(200).send({ message: 'Imagen agregada', info });
+}
+
+export const removeOption = async (
+	req: FastifyRequest<{
+		Params: { id: string };
+	}>,
+	reply: FastifyReply
+): Promise<void> => {
+	await getRepository('Options').delete(req.params.id);
 
 	reply.status(200).send({ message: Msg('Opcion').delete });
 };

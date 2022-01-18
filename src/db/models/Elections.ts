@@ -41,6 +41,18 @@ export default class Elections {
 	@IsDate()
 	public createdAt!: Date;
 
+	// @Column()
+	// @IsDate()
+	// public reviewAt!: Date;
+
+	// @Column()
+	// @IsDate()
+	// public voteingAt!: Date;
+
+	// @Column()
+	// @IsDate()
+	// public finishAt!: Date;
+
 	@UpdateDateColumn()
 	@IsDate()
 	public updatedAt!: Date;

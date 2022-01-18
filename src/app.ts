@@ -1,9 +1,10 @@
 import fastify from './config/server';
-import 'reflect-metadata';
+// import 'reflect-metadata';
 import { FastifyInstance } from 'fastify';
 import Router from './router';
 import * as env from 'dotenv';
 import { createConnection } from 'typeorm';
+// import CronJobs from './config/jobs';
 
 const start = async (): Promise<FastifyInstance> => {
 	try {
@@ -20,6 +21,10 @@ const start = async (): Promise<FastifyInstance> => {
 		// ? levantando servidor
 		if (NODE_ENV === 'developing') await fastify.listen(PORT);
 		else fastify.listen(PORT, HOST);
+
+		// ? cron jobs
+		// CronJobs();
+
 
 		console.log('_________');
 		console.log('|       |');

@@ -126,8 +126,6 @@ export const newPassEmail = async (
 	reply.status(200).send({ message: 'Correo enviado' });
 };
 
-
-
 export const newPass = async (
 	req: FastifyRequest<{
 		Body: Users;
@@ -141,4 +139,39 @@ export const newPass = async (
 	await getRepository('Users').update({ email: token.email }, { password });
 
 	reply.status(200).send({ message: 'contraseña editada' });
+};
+
+export const editUser = async (
+	req: FastifyRequest<{
+		Body: Users;
+		Params: { id: string };
+	}>,
+	reply: FastifyReply
+): Promise<void> => {
+	// 
+	const { id } = req.params;
+	const { email } = req.body;
+
+	const user = (await getRepository('Users').findOne({ id, email }) as Users | undefined);
+	if (!user) throw { message: 'el correo suministrado no existe', code: 400 };
+
+	await getRepository('Users').update(id, req.body);
+
+	reply.status(200).send({ message: 'usuario editado' });
+};
+
+export const deleteUser = async (
+	req: FastifyRequest<{
+		Body: Users;
+	}>,
+	reply: FastifyReply
+): Promise<void> => {
+
+	const { id } = req.body;
+	const user = (await getRepository('Users').findOne({ id }) as Users | undefined);
+	if (!user) throw { message: 'el correo suministrado no existe', code: 400 };
+
+	await getRepository('Users').delete(id);
+
+	reply.status(200).send({ message: 'usuario eliminado' });
 };

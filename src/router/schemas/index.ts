@@ -10,7 +10,7 @@ const option = S.object()
 	.prop('id', S.number().minimum(1))
 	.prop('creator', S.number().minimum(1))
 	.prop('status', S.boolean())
-	.prop('Imgs', S.array().minItems(0).items(imgs))
+	.prop('Imgs', S.array().minItems(0).contains(imgs))
 
 
 const election = S.object()
@@ -20,7 +20,7 @@ const election = S.object()
 	.prop('deleteAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
-	.prop('Options', S.array().minItems(0).items(option));
+	.prop('Options', S.array().minItems(0).contains(option));
 
 const roles = S.object().prop('Rol', S.number())
 

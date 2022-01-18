@@ -1,12 +1,10 @@
-import Users from '../db/models/Users';
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { getRepository, Not, In } from 'typeorm';
 import Elections from '../db/models/Elections';
 import Msg from '../hooks/messages';
-import { FastifyJWT } from 'fastify-jwt';
-import HookHandlerDoneFunction from 'fastify';
 import Options from '../db/models/Options';
 import R_User_Options from 'db/models/R_User_Options';
+import { DateTime } from 'luxon';
 
 export const getElectionsById = async (
 	req: FastifyRequest<{
@@ -52,6 +50,13 @@ export const createElections = async (
 	if (valid) throw { message: 'ya existe una eleccion activa', statusCode: 400 };
 	//
 	req.body.status = 1;
+	// 
+	// req.body.voteingAt = req.body.voteingAt ?? DateTime.local().toFormat('DD-MM-YYYY').toString();
+	// // 
+	// req.body.voteingAt = req.body.voteingAt ?? DateTime.local().plus({ days: 5 }).toFormat('DD-MM-YYYY').toString();
+	// // 
+	// req.body.finishAt = req.body.finishAt ?? DateTime.local().plus({ days: 10 }).toFormat('DD-MM-YYYY').toString();
+
 	const info = await getRepository('Elections').save(req.body);
 
 	reply.status(200).send({ message: 'Eleccion creada', info });
@@ -60,12 +65,12 @@ export const createElections = async (
 export const removeElections = async (
 	req: FastifyRequest<{
 		Body: Elections;
-		Params: { id_election: string };
+		Params: { id: string };
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
 	//
-	await getRepository('Elections').delete(req.params.id_election);
+	await getRepository('Elections').delete(req.params.id);
 
 	reply.status(200).send({ message: 'Eleccion eliminada' });
 };
@@ -73,14 +78,14 @@ export const removeElections = async (
 export const editElectionsById = async (
 	req: FastifyRequest<{
 		Body: Elections;
-		Params: { id_election: string };
+		Params: { id: string };
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	await getRepository('Elections').update(req.params.id_election, req.body);
+	await getRepository('Elections').update(req.params.id, req.body);
 
 	const info = await getRepository('Elections').findOne({
-		where: { id: req.params.id_election },
+		where: { id: req.params.id },
 		relations: ['Options', 'Options.Imgs'],
 	});
 

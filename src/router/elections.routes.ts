@@ -66,14 +66,14 @@ const Elections_Routes: RouteOptions[] = [
 	},
 	{
 		method: 'PUT',
-		url: '/elections/:id_election',
+		url: '/elections/:id',
 		schema: {
 			body: S.object()
 				.prop('name', S.string().required())
 				.prop('Options', S.array().items(S.number()))
 				.prop('status', S.object().prop('id', S.number()).prop('name', S.string())),
 
-			params: S.object().prop('id_election', S.string().required()),
+			params: S.object().prop('id', S.string().required()),
 
 			response: Resp(S.object().prop('message', S.string()).prop('info', schemas.election)),
 		},
@@ -81,9 +81,9 @@ const Elections_Routes: RouteOptions[] = [
 	},
 	{
 		method: 'DELETE',
-		url: '/elections/:id_election',
+		url: '/elections/:id',
 		schema: {
-			params: S.object().prop('id_election', S.string().required()),
+			params: S.object().prop('id', S.string().required()),
 			response: Resp(),
 		},
 		handler: removeElections as RouteHandlerMethod,

@@ -77,6 +77,8 @@ const valid: preValidationHookHandler = (req, reply, done): void => {
 		})
 	};
 
+	req.log.info('req.body', req.body);
+
 	done();
 };
 
