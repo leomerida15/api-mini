@@ -35,7 +35,7 @@ export const validRolByToken = (roles: Rols[], { routerPath, routerMethod }: rou
 		{ routerPath: '/v1/elections/:id', routerMethod: 'GET', roles: [] },
 		{ routerPath: '/v1/elections/:id', routerMethod: 'DELETE', roles: [] },
 		{ routerPath: '/v1/elections/:id', routerMethod: 'PUT', roles: [] },
-		{ routerPath: '/v1/elections/ultimate', routerMethod: 'PUT', roles: ['*'] },
+		{ routerPath: '/v1/elections/ultimate', routerMethod: 'GET', roles: ['*'] },
 		{ routerPath: '/v1/elections/:id_election/:id_option', routerMethod: 'PUT', roles: ['Votante'] },
 		//
 		// ? Options Routes
@@ -43,6 +43,7 @@ export const validRolByToken = (roles: Rols[], { routerPath, routerMethod }: rou
 		{ routerPath: '/v1/options', routerMethod: 'POST', roles: ['Proponente'] },
 		{ routerPath: '/v1/options', routerMethod: 'GET', roles: [] },
 		{ routerPath: '/v1/options', routerMethod: 'PUT', roles: [] },
+		{ routerPath: '/v1/options/:id/img', routerMethod: 'PUT', roles: ['Proponente'] },
 		{ routerPath: '/v1/options/:id', routerMethod: 'DELETE', roles: [] },
 		//
 		// ? Users Routes
@@ -56,7 +57,7 @@ export const validRolByToken = (roles: Rols[], { routerPath, routerMethod }: rou
 
 	if (!validRoute) return false
 
-	if (!validRoute.roles.length) return true;
+	if (validRoute.roles.includes('*')) return true;
 
 	const validRol = validRoute.roles.find((rol: roles) => Rols.includes(rol))
 
