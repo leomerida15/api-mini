@@ -26,8 +26,7 @@ export const createOptions = async (
 ): Promise<void> => {
 	req.body.creator = JSON.parse(req.headers.authorization as any).id;
 
-	await getRepository('Options').save(req.body);
-	const info = await getRepository('Options').findOne({ where: { title: req.body.title }, relations: ['Imgs'] });
+	const info = await getRepository('Options').save(req.body);
 
 	reply.status(200).send({ message: 'opciones creada', info });
 };
@@ -44,9 +43,7 @@ export const addImgToOption = async (
 	if (!valid) throw { message: 'no existe la opcion', statusCode: 400 };
 
 
-
 	const imgs = await getRepository('Imgs').save(req.body.Imgs!);
-
 
 	await getConnection().query(/*sql*/`
 

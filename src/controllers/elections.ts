@@ -5,6 +5,7 @@ import Msg from '../hooks/messages';
 import Options from '../db/models/Options';
 import R_User_Options from 'db/models/R_User_Options';
 import { DateTime } from 'luxon';
+import Election_Status from 'db/models/Election_Status';
 
 export const getElectionsById = async (
 	req: FastifyRequest<{
@@ -25,6 +26,15 @@ export const getElectionsById = async (
 
 	return reply.status(200).send({ message: 'Eleccion', info });
 };
+
+export const getStatusToElections = async (
+	req: FastifyRequest,
+	reply: FastifyReply
+): Promise<void> => {
+	const info = await getRepository('Election_Status').find() as Election_Status[];
+
+	reply.status(200).send({ message: 'status de elecciones', info });
+}
 
 export const getElectionsAll = async (
 	req: FastifyRequest<{
@@ -57,7 +67,12 @@ export const createElections = async (
 	// // 
 	// req.body.finishAt = req.body.finishAt ?? DateTime.local().plus({ days: 10 }).toFormat('DD-MM-YYYY').toString();
 
-	const info = await getRepository('Elections').save(req.body);
+	const resp = await getRepository('Elections').save(req.body);
+
+	const info = await getRepository('Elections').findOne({
+		where: { id: resp.id },
+		relations: ['Options', 'Options.Imgs', 'status'],
+	});
 
 	reply.status(200).send({ message: 'Eleccion creada', info });
 };
@@ -82,14 +97,26 @@ export const editElectionsById = async (
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
+	console.clear();
+	console.log(req.body);
+	const { status } = req.body;
+
+	if (status && status !== 4) {
+		const valid = await getRepository('Elections').count({ status: Not(4), id: Not(req.params.id) });
+		if (valid) throw { message: 'ya existe una eleccion activa', statusCode: 400 };
+	}
+
 	await getRepository('Elections').update(req.params.id, req.body);
 
 	const info = await getRepository('Elections').findOne({
 		where: { id: req.params.id },
-		relations: ['Options', 'Options.Imgs'],
+		relations: ['Options', 'Options.Imgs', 'status'],
 	});
 
-	reply.status(200).send({ message: Msg('Elections ').edit, info });
+	console.clear();
+	console.log(`info`, info)
+
+	reply.status(200).send({ message: Msg('Elections ').edit });
 };
 
 export const voteOptionToElection = async (

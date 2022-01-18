@@ -12,11 +12,12 @@ const option = S.object()
 	.prop('status', S.boolean())
 	.prop('Imgs', S.array().minItems(0).contains(imgs))
 
+const status = S.object().prop('name', S.number()).prop('id', S.number());
 
 const election = S.object()
 	.prop('id', S.number())
 	.prop('name', S.string())
-	.prop('status', S.object().prop('id', S.number()).prop('name', S.string()))
+	.prop('status', status)
 	.prop('deleteAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
@@ -38,11 +39,17 @@ const users = S.object()
 	.prop('email', S.string())
 	.prop('roles', S.array().contains(roles))
 
+const election_status = S.object()
+	.prop('id', S.number())
+	.prop('name', S.string())
+
+
 const SchoemaObject = {
 	election,
 	option,
 	login,
-	users
+	users,
+	election_status
 };
 
 export default SchoemaObject;

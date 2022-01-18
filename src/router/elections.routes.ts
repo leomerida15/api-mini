@@ -2,7 +2,7 @@ import { RouteHandlerMethod, RouteOptions } from 'fastify';
 import S from 'fluent-json-schema';
 import schemas from './schemas';
 import { Resp } from '../config/server';
-import { getUltimateElection } from '../controllers/elections';
+import { getUltimateElection, getStatusToElections } from '../controllers/elections';
 import {
 	createElections,
 	getElectionsAll,
@@ -40,7 +40,7 @@ const Elections_Routes: RouteOptions[] = [
 		url: '/elections',
 		schema: {
 			response: Resp(
-				S.object().prop('message', S.string()).prop('info', S.array().minItems(0).items(schemas.election))
+				S.object().prop('message', S.string()).prop('info', S.array().minItems(0).contains(schemas.election))
 			),
 		},
 		handler: getElectionsAll as RouteHandlerMethod,
@@ -64,18 +64,31 @@ const Elections_Routes: RouteOptions[] = [
 		},
 		handler: getElectionsById as RouteHandlerMethod,
 	},
+
+	{
+		method: 'GET',
+		url: '/elections/status',
+		schema: {
+
+			response: Resp(
+				S.object()
+					.prop('message', S.string())
+					.prop('info', S.array().minItems(0).contains(schemas.election_status))
+			),
+		},
+		handler: getStatusToElections as RouteHandlerMethod,
+	},
 	{
 		method: 'PUT',
 		url: '/elections/:id',
 		schema: {
 			body: S.object()
-				.prop('name', S.string().required())
-				.prop('Options', S.array().items(S.number()))
-				.prop('status', S.object().prop('id', S.number()).prop('name', S.string())),
+				.prop('name', S.string())
+				.prop('status', S.number()),
 
 			params: S.object().prop('id', S.string().required()),
 
-			response: Resp(S.object().prop('message', S.string()).prop('info', schemas.election)),
+			response: Resp(S.object().prop('message', S.string())),
 		},
 		handler: editElectionsById as RouteHandlerMethod,
 	},

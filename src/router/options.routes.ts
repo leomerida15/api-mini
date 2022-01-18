@@ -10,7 +10,7 @@ const Options_Routes: RouteOptions[] = [
 	{
 		method: 'POST',
 		url: '/options',
-		preValidation: FormatData,
+		// preValidation: FormatData,
 		schema: {
 			body: schemas.option,
 

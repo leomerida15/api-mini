@@ -688,6 +688,34 @@
 					"response": []
 				},
 				{
+					"name": "ultima eleccion Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
+								"description": "token",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/v1/elections/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"elections",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "editar una eleccion por id",
 					"request": {
 						"method": "PUT",
@@ -1186,10 +1214,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/v1/options/:id/img",
+							"raw": "http://31.220.31.43:5000/v1/options/:id/img",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"31",
+								"220",
+								"31",
+								"43"
 							],
 							"port": "5000",
 							"path": [
@@ -1234,10 +1265,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5000/v1/options/:id/img",
+									"raw": "http://31.220.31.43:5000/v1/options/:id/img",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"31",
+										"220",
+										"31",
+										"43"
 									],
 									"port": "5000",
 									"path": [
@@ -1300,38 +1334,19 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "Opcion nueva test 32",
-									"description": "text y es unico",
-									"type": "text"
-								},
-								{
-									"key": "descript",
-									"value": "descriccion compelta",
-									"description": "text",
-									"type": "text"
-								},
-								{
-									"key": "election",
-									"value": "2",
-									"description": "id de la eleccion",
-									"type": "text"
-								},
-								{
-									"key": "images",
-									"type": "file",
-									"src": "/C:/Users/noteb/Dropbox/My PC (DESKTOP-TUHIIIT)/Downloads/WhatsApp Image 2021-07-23 at 01.52.05.jpeg"
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Opcion nueva test 32sdcz\",\r\n    \"descript\": \"descriccion compelta\",\r\n    \"election\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
-							"raw": "http://localhot:5000/v1/options",
+							"raw": "http://localhost:5000/v1/options",
 							"protocol": "http",
 							"host": [
-								"localhot"
+								"localhost"
 							],
 							"port": "5000",
 							"path": [
@@ -1342,43 +1357,24 @@
 					},
 					"response": [
 						{
-							"name": "crear opcion",
+							"name": "crear opcion Copy",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "authorization",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiUHJvcG9uZW50ZSJ9LHsiaWQiOjMsIm5hbWUiOiJWb3RhbnRlIn0seyJpZCI6NCwibmFtZSI6IlJldmlzb3IifV0sImVtYWlsIjoiY2FybG9zamdyOEBnbWFpbC5jb20iLCJpYXQiOjE2NDE1MDUyNTB9.h1UBA-b4iViD5cZzTnuUQIPTAHYNT4zxIY6M9-lecn4",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiQWRtaW4ifSx7ImlkIjoyLCJuYW1lIjoiVXN1YXJpbyBwcm9wb25lbnRlIn0seyJpZCI6MywibmFtZSI6IlVzdWFyaW8gdm90YW50ZSJ9LHsiaWQiOjQsIm5hbWUiOiJVc3VhcmlvIHJldmlzb3IifV0sImlhdCI6MTY0MDAzMTU1MH0.8RDOSYFHTOGCfL82-QCvySpm8qDOQoHnatsGP--j1WE",
 										"type": "text"
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "title",
-											"value": "titulo  45sdaa",
-											"description": "text y es unico",
-											"type": "text"
-										},
-										{
-											"key": "descript",
-											"value": "descriccion compelta",
-											"description": "text",
-											"type": "text"
-										},
-										{
-											"key": "election",
-											"value": "2",
-											"description": "id de la eleccion",
-											"type": "text"
-										},
-										{
-											"key": "images",
-											"type": "file",
-											"src": "/C:/Users/noteb/Dropbox/My PC (DESKTOP-TUHIIIT)/Pictures/Hip Script Etsy Shop Icon.png"
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Opcion nueva test 32sdcza\",\r\n    \"descript\": \"descriccion compelta\",\r\n    \"election\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
 									"raw": "http://localhost:5000/v1/options",
@@ -1407,11 +1403,11 @@
 								},
 								{
 									"key": "content-length",
-									"value": "136"
+									"value": "166"
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 06 Jan 2022 21:44:15 GMT"
+									"value": "Tue, 18 Jan 2022 17:27:18 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1423,7 +1419,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"opciones creada\",\n    \"info\": {\n        \"title\": \"titulo  45sdaa\",\n        \"descript\": \"descriccion compelta\",\n        \"votes\": 0,\n        \"id\": 4,\n        \"creator\": 2,\n        \"Imgs\": []\n    }\n}"
+							"body": "{\n    \"message\": \"opciones creada\",\n    \"info\": {\n        \"title\": \"Opcion nueva test 32sdcza\",\n        \"descript\": \"descriccion compelta\",\n        \"election\": 2,\n        \"votes\": 0,\n        \"id\": 26,\n        \"creator\": 2,\n        \"status\": false\n    }\n}"
 						}
 					]
 				},
