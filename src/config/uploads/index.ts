@@ -10,6 +10,7 @@ const filename = (req: FastifyRequest, file: any, cb: any) => {
 const storage = diskStorage({
 	destination: path.resolve('static'),
 	filename,
+
 });
 
 const options = {
@@ -57,13 +58,6 @@ const Format = (body: any): { [k: string | number | symbol]: any } => {
 
 	return Object.fromEntries(resp);
 };
-
-interface Req
-	extends FastifyRequest<{
-		Body: { Imgs: any[] } | any
-	}> {
-	files: any;
-}
 
 const valid: preValidationHookHandler = (req, reply, done): void => {
 	const { files }: any = req;

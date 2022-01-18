@@ -49,7 +49,8 @@ const SchoemaObject = {
 	option,
 	login,
 	users,
-	election_status
+	election_status,
+	imgs
 };
 
 export default SchoemaObject;

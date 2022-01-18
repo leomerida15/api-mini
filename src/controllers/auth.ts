@@ -6,6 +6,39 @@ import jwt from 'jsonwebtoken';
 import { Options } from 'multer';
 import mailMsg from '../hooks/mail';
 import { mailer } from '../hooks/mail/index';
+import xlsx from 'node-xlsx';
+import fs from 'fs';
+import path from 'path';
+
+export const registerBig = async (
+	req: FastifyRequest<{
+		Body: { Imgs: any[] };
+	}>,
+	reply: FastifyReply,
+	done: any
+): Promise<FastifyReply | void> => {
+
+	console.clear();
+	console.log(`req.body`, req.body)
+
+	const workSheetsFromBuffer = xlsx.parse(fs.readFileSync(path.resolve(req.body.Imgs[0].path)));
+
+	// //
+	// const { email, password } = req.body;
+
+	// const valid = await getRepository('Users').count({ email });
+
+	// if (valid) throw { message: 'el correo suministrado ya existe', code: 400 };
+
+	// req.body.password = await bcrypt.hash(password, 12);
+	// const user: Users = req.body;
+
+	// await getRepository('Users').save(user);
+
+	// const info = await getRepository('Users').findOne({ where: { email }, relations: ['roles'] });
+
+	return reply.status(200).send({ message: 'usuario registrado' });
+};
 
 export const register = async (
 	req: FastifyRequest<{
