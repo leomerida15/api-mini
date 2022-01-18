@@ -1,6 +1,6 @@
 import Users from '../db/models/Users';
 import fastify, { FastifyRequest, FastifyReply } from 'fastify';
-import { getRepository, Not, In } from 'typeorm';
+import { getRepository, Not, In, getConnection } from 'typeorm';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { Options } from 'multer';
@@ -150,12 +150,24 @@ export const editUser = async (
 ): Promise<void> => {
 	// 
 	const { id } = req.params;
-	const { email } = req.body;
 
-	const user = (await getRepository('Users').findOne({ id, email }) as Users | undefined);
+	const user = (await getRepository('Users').findOne({ id }) as Users | undefined);
 	if (!user) throw { message: 'el correo suministrado no existe', code: 400 };
 
-	await getRepository('Users').update(id, req.body);
+	const { roles, ...data } = req.body;
+	await getRepository('Users').update(id, data);
+
+	if (roles) {
+		await getRepository('R_User_Rols').delete({ id_user: id });
+
+		const rolesData = roles.map((role: any) => (`(${id}, ${role.id})`)).join(', ');
+
+		await getConnection().query(/*sql*/`
+		INSERT INTO public."R_User_Rols"
+		(id_user, id_rol)
+		VALUES ${rolesData};`);
+
+	}
 
 	reply.status(200).send({ message: 'usuario editado' });
 };
