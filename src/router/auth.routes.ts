@@ -1,8 +1,9 @@
 import { RouteHandlerMethod, RouteOptions } from 'fastify';
-import { register, login, getUsers, newPass, newPassEmail, editUser } from '../controllers/auth';
+import { register, login, getUsers, newPass, newPassEmail, editUser, registerBig } from '../controllers/auth';
 import S from 'fluent-json-schema';
 import schemas from './schemas';
 import { Resp } from '../config/server';
+import { FormatData } from '../config/uploads/index';
 
 const Auth: RouteOptions[] = [
 	{
@@ -37,6 +38,20 @@ const Auth: RouteOptions[] = [
 			),
 		},
 		handler: register as RouteHandlerMethod,
+	},
+	{
+		method: 'POST',
+		url: '/auth/register/big',
+		preValidation: FormatData,
+		schema: {
+			body: S.object()
+				.prop('Imgs', S.array().minItems(0).items(schemas.imgs)),
+			response: Resp(
+				S.object()
+					.prop('message', S.string().required())
+			),
+		},
+		handler: registerBig as RouteHandlerMethod,
 	},
 	{
 		method: 'POST',

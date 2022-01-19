@@ -7,6 +7,28 @@ import { Options } from 'multer';
 import mailMsg from '../hooks/mail';
 import { mailer } from '../hooks/mail/index';
 import Elections from 'db/models/Elections';
+import xlsx from 'node-xlsx';
+import fs from 'fs/promises'
+import path from 'path';
+
+export const registerBig = async (
+	req: FastifyRequest<{
+		Body: { Imgs: any[] };
+	}>,
+	reply: FastifyReply,
+): Promise<void> => {
+	const { Imgs } = req.body;
+
+	const route = path.join(path.resolve(), Imgs[0].path);
+
+	const buffer = await fs.readFile(route);
+
+	const obj = xlsx.parse(buffer);
+
+	console.log(`obj`, obj[0].data);
+
+	reply.status(200).send({ message: 'usuarios registrados' });
+};
 
 export const register = async (
 	req: FastifyRequest<{
@@ -86,17 +108,25 @@ export const login = async (
 	if (election) {
 		option = await getRepository('Options').findOne({
 			where: { election: election.id, creator: user.id },
+			relations: ['Options', 'Options.Imgs'],
 		}) as Options | undefined ?? {}
 
 		let ids_options = election.Options!.map(({ id }: any) => id);
 
 		vote = await getRepository('R_User_Options').findOne({
 			where: { Option: In(ids_options), User: user.id },
-			relations: ['Option'],
+			relations: ['Options', 'Options.Imgs'],
 		}) as any | undefined ?? {};
 	}
 
-	reply.status(200).send({ message: 'usuario logeado', info, token, option, election, vote: vote.Option ? vote.Option : {} });
+	reply.status(200).send({
+		message: 'usuario logeado',
+		info,
+		token,
+		option,
+		election,
+		vote: vote.Option ? vote.Option : {}
+	});
 };
 
 export const getUsers = async (

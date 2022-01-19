@@ -1,9 +1,8 @@
 import { RouteHandlerMethod, RouteOptions } from 'fastify';
 import S from 'fluent-json-schema';
 import { Resp } from '../config/server';
-import { uploads, FormatData, upload } from '../config/uploads/index';
+import { FormatData } from '../config/uploads/index';
 import { createOptions, getOptions, getOptionsById, removeOption, editOptions, addImgToOption } from '../controllers/options';
-import { removeElections } from '../controllers/elections';
 import schemas from './schemas';
 
 const Options_Routes: RouteOptions[] = [
