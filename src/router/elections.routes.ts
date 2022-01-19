@@ -40,7 +40,12 @@ const Elections_Routes: RouteOptions[] = [
 		url: '/elections',
 		schema: {
 			response: Resp(
-				S.object().prop('message', S.string()).prop('info', S.array().minItems(0).items(schemas.election))
+				S.object()
+					.prop('message', S.string())
+					.prop('info',
+						S.array().minItems(0)
+							.items(schemas.election.prop('status', schemas.status))
+					)
 			),
 		},
 		handler: getElectionsAll as RouteHandlerMethod,
