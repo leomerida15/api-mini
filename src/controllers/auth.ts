@@ -96,7 +96,7 @@ export const login = async (
 
 		return ((await getRepository('Elections').findOne({
 			where: [{ status: 4 }],
-			relations: ['Options', 'status'],
+			relations: ['Options', 'status', 'Options.Imgs'],
 			orderby: { createAt: 'DESC' },
 		})) as Elections | undefined);
 	})()
@@ -108,14 +108,14 @@ export const login = async (
 	if (election) {
 		option = await getRepository('Options').findOne({
 			where: { election: election.id, creator: user.id },
-			relations: ['Options', 'Options.Imgs'],
+			relations: ['Imgs'],
 		}) as Options | undefined ?? {}
 
 		let ids_options = election.Options!.map(({ id }: any) => id);
 
 		vote = await getRepository('R_User_Options').findOne({
 			where: { Option: In(ids_options), User: user.id },
-			relations: ['Options', 'Options.Imgs'],
+			relations: ['Option'],
 		}) as any | undefined ?? {};
 	}
 
