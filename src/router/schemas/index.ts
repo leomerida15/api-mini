@@ -17,7 +17,6 @@ const status = S.object().prop('name', S.number()).prop('id', S.number());
 const election = S.object()
 	.prop('id', S.number())
 	.prop('name', S.string())
-	.prop('status', status)
 	.prop('deleteAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
