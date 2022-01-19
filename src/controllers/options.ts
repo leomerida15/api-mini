@@ -7,9 +7,7 @@ import Msg from '../hooks/messages/index';
 import Imgs from '../db/models/Imgs';
 
 export const getOptions = async (
-	req: FastifyRequest<{
-		Params: { id_option: string };
-	}>,
+	req: FastifyRequest,
 	reply: FastifyReply
 ): Promise<any> => {
 	const info = (await getRepository('Options').find({ relations: ['Imgs'] })) as Options[];
@@ -20,7 +18,6 @@ export const getOptions = async (
 export const createOptions = async (
 	req: FastifyRequest<{
 		Body: Options;
-		Params: { id_option: string };
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
@@ -69,11 +66,11 @@ export const removeOption = async (
 
 export const getOptionsById = async (
 	req: FastifyRequest<{
-		Params: { id_option: string };
+		Params: { id: string };
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	const info = await getRepository(Options).findOne({ where: { id: req.params.id_option }, relations: ['Imgs'] });
+	const info = await getRepository(Options).findOne({ where: { id: req.params.id }, relations: ['Imgs'] });
 
 	reply.status(200).send({ message: Msg('opcion').getBy('id'), info });
 };
@@ -85,25 +82,14 @@ interface bodyEditOption extends Options {
 export const editOptions = async (
 	req: FastifyRequest<{
 		Body: bodyEditOption;
-		Params: { id_option: string };
+		Params: { id: string };
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	console.clear();
-	console.log(`req.params`, req.params);
-	console.info('req.body', req.body);
 
-	const { status } = req.body;
+	await getRepository('Options').update(req.params.id, req.body);
 
-
-	const edit = await getConnection().query(/*sql*/`
-
-	UPDATE public."options" SET status=${status} WHERE id=6;
-
-	`);
-	// console.log(`edit`, edit);
-
-	const info = await getRepository('Options').findOne({ where: { title: req.body.title }, relations: ['Imgs'] });
+	const info = await getRepository('Options').findOne({ where: { id: req.params.id }, relations: ['Imgs'] });
 
 	reply.status(200).send({ message: 'opciones editada', info });
 };
