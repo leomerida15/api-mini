@@ -22,7 +22,7 @@ const election = S.object()
 	.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
 	.prop('Options', S.array().minItems(0).items(option));
 
-const roles = S.object().prop('Rol', S.number())
+const roles = S.object().prop('name', S.string()).prop('id', S.number());
 
 const login = S.object()
 	.prop('id', S.number())
