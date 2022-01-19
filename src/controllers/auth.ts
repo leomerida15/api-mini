@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import { Options } from 'multer';
 import mailMsg from '../hooks/mail';
 import { mailer } from '../hooks/mail/index';
+import Elections from 'db/models/Elections';
 
 export const register = async (
 	req: FastifyRequest<{
@@ -58,11 +59,25 @@ export const login = async (
 
 	const { password, ...info } = user;
 
-	const election =
-		((await getRepository('Elections').findOne({
+
+
+	const election = await (async () => {
+
+
+		const activas = ((await getRepository('Elections').findOne({
+			where: [{ status: Not(4) }],
 			relations: ['Options', 'status'],
-			orderby: { createAt: 'ASC' },
-		})) as any | undefined) ?? {};
+			orderby: { createAt: 'DESC' },
+		})) as Elections | undefined)
+
+		if (activas) return activas;
+
+		return ((await getRepository('Elections').findOne({
+			where: [{ status: 4 }],
+			relations: ['Options', 'status'],
+			orderby: { createAt: 'DESC' },
+		})) as Elections | undefined);
+	})()
 
 	let option: any = {};
 

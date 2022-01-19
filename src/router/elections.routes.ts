@@ -44,12 +44,13 @@ const Elections_Routes: RouteOptions[] = [
 			),
 		},
 		handler: getElectionsAll as RouteHandlerMethod,
-	}, {
+	},
+	{
 		method: 'GET',
 		url: '/elections/ultimate',
 		schema: {
 			response: Resp(
-				S.object().prop('message', S.string()).prop('info', schemas.election)
+				S.object().prop('message', S.string()).prop('info', schemas.election.prop('status', schemas.status))
 			),
 		},
 		handler: getUltimateElection as RouteHandlerMethod,
