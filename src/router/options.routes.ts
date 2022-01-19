@@ -33,7 +33,7 @@ const Options_Routes: RouteOptions[] = [
 						'info',
 						S.array()
 							.minItems(0)
-							.contains(schemas.option)
+							.items(schemas.option)
 					)
 			),
 		},

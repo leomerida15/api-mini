@@ -89,7 +89,20 @@ export const editOptions = async (
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	await getRepository('Options').update(req.params.id_option, req.body);
+	console.clear();
+	console.log(`req.params`, req.params);
+	console.info('req.body', req.body);
+
+	const { status } = req.body;
+
+
+	const edit = await getConnection().query(/*sql*/`
+
+	UPDATE public."options" SET status=${status} WHERE id=6;
+
+	`);
+	// console.log(`edit`, edit);
+
 	const info = await getRepository('Options').findOne({ where: { title: req.body.title }, relations: ['Imgs'] });
 
 	reply.status(200).send({ message: 'opciones editada', info });

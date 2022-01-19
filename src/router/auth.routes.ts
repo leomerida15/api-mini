@@ -18,7 +18,7 @@ const Auth: RouteOptions[] = [
 					S.array()
 						.minItems(1)
 						.maxItems(4)
-						.contains(S.object().prop('id', S.number().required()).prop('name', S.string().required()))
+						.items(S.object().prop('id', S.number().required()).prop('name', S.string().required()))
 				)
 				.required(),
 			response: Resp(
@@ -30,7 +30,7 @@ const Auth: RouteOptions[] = [
 							.prop('id', S.number())
 							.prop('name', S.string())
 							.prop('email', S.string())
-							.prop('roles', S.array().contains(S.object().prop('Rol', S.number())))
+							.prop('roles', S.array().items(S.object().prop('Rol', S.number())))
 							.prop('createdAt', S.raw({ type: 'date', format: 'date' }))
 							.prop('updatedAt', S.raw({ type: 'date', format: 'date' }))
 					)
@@ -94,7 +94,7 @@ const Auth: RouteOptions[] = [
 					S.array()
 						.minItems(1)
 						.maxItems(4)
-						.contains(S.object().prop('id', S.number()).prop('name', S.string()))
+						.items(S.object().prop('id', S.number()).prop('name', S.string()))
 				),
 
 			params: S.object().prop('id', S.string().required()),
