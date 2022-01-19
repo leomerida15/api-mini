@@ -97,8 +97,6 @@ export const editElectionsById = async (
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-	console.clear();
-	console.log(req.body);
 	const { status } = req.body;
 
 	if (status && status !== 4) {
@@ -112,9 +110,6 @@ export const editElectionsById = async (
 		where: { id: req.params.id },
 		relations: ['Options', 'Options.Imgs', 'status'],
 	});
-
-	console.clear();
-	console.log(`info`, info)
 
 	reply.status(200).send({ message: Msg('Elections ').edit });
 };

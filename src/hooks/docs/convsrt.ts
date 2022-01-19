@@ -1,4 +1,3 @@
-import { fromPath } from 'pdf2pic';
 import { base, replace } from './doc';
 
 interface optionsPDF {
@@ -12,9 +11,9 @@ interface optionsPDF {
 	compression?: string;
 }
 
-export const toConvert = (to: string) => {};
+export const toConvert = (to: string) => { };
 //
-export const fromConvert = (from: string): any => {};
+export const fromConvert = (from: string): any => { };
 //
 export const convert = async (file: any, to: string, options?: optionsPDF) => {
 	const from: string = file.split('.')[file.split('.').length - 1];
@@ -33,8 +32,6 @@ export const convert = async (file: any, to: string, options?: optionsPDF) => {
 		const pageToConvertAsImage: number = 1;
 
 		const resolve = await storeAsImage(pageToConvertAsImage);
-
-		console.log('resolve', resolve);
 
 		return resolve;
 	}
