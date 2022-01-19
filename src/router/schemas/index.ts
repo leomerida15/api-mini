@@ -10,7 +10,7 @@ const option = S.object()
 	.prop('id', S.number().minimum(1))
 	.prop('creator', S.number().minimum(1))
 	.prop('status', S.boolean())
-	.prop('Imgs', S.array().minItems(0).contains(imgs))
+	.prop('Imgs', S.array().minItems(0).items(imgs))
 
 const status = S.object().prop('name', S.string()).prop('id', S.number());
 
