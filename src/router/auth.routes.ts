@@ -51,7 +51,7 @@ const Auth: RouteOptions[] = [
 					.prop('token', S.string().required())
 					.prop('info', schemas.login)
 					.prop('option', schemas.option)
-					.prop('election', schemas.election)
+					.prop('election', schemas.election.prop('status', schemas.status))
 					.prop('vote', schemas.option)
 			),
 		},

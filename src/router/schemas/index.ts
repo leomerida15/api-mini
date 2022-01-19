@@ -12,7 +12,7 @@ const option = S.object()
 	.prop('status', S.boolean())
 	.prop('Imgs', S.array().minItems(0).contains(imgs))
 
-const status = S.object().prop('name', S.number()).prop('id', S.number());
+const status = S.object().prop('name', S.string()).prop('id', S.number());
 
 const election = S.object()
 	.prop('id', S.number())
@@ -49,7 +49,8 @@ const SchoemaObject = {
 	login,
 	users,
 	election_status,
-	imgs
+	imgs,
+	status
 };
 
 export default SchoemaObject;
