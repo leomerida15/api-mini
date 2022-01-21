@@ -20,6 +20,7 @@ const start = async (): Promise<FastifyInstance> => {
 
 		// ? levantando servidor
 		if (NODE_ENV === 'developing') await fastify.listen(PORT);
+		// 
 		else fastify.listen(PORT, HOST);
 
 		// ? cron jobs
