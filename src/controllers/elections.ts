@@ -180,7 +180,7 @@ export const getUltimateElection = async (
 ): Promise<void> => {
 	const info = await getRepository('Elections').findOne({
 		relations: ['Options', 'Options.Imgs', 'status'],
-		order: 'DESC',
+		order: { createdAt: 'DESC' }
 	});
 
 	if (!info) throw { message: 'no existe una eleccion activa', statusCode: 400 };
