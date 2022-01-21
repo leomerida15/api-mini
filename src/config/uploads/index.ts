@@ -2,6 +2,8 @@ import multer, { diskStorage } from 'fastify-multer'; // or import multer from '
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { FastifyRequest, preValidationHookHandler } from 'fastify';
+import Jimp from 'jimp/*';
+import * as Doc from '../../hooks/docs';
 
 const filename = (req: FastifyRequest, file: any, cb: any) => {
 	cb(null, uuidv4() + '@' + file.originalname.replace(/ /gi, '_'));
@@ -13,11 +15,21 @@ const storage = diskStorage({
 
 });
 
-const options = {
-	storage,
-};
 
-export const uploads = multer(options);
+export const upload = multer({
+	storage,
+	fileFilter: (req, file, cb) => {
+
+		const filetypes = /.jpeg|.jpg|.png|.pdf|.xlsx/;
+		const mimetype = filetypes.test(file.mimetype);
+		const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+		if (mimetype && extname) {
+			return cb(null, true);
+		}
+		cb(new Error('el formato del archivo no es valido'), false);
+	},
+});
 
 const isJson = (str: string) => {
 	try {
@@ -59,16 +71,37 @@ const Format = (body: any): { [k: string | number | symbol]: any } => {
 	return Object.fromEntries(resp);
 };
 
-const valid: preValidationHookHandler = (req, reply, done): void => {
+const valid: preValidationHookHandler = async (req, reply, done): Promise<void> => {
 	const { files }: any = req;
+
+	const filePath = path.join(path.resolve(), 'static', files.file.filename);
+
+
+	const stop = files.map(async (file: any, i: number) => {
+
+
+		await Doc.Convert(file.filename, 'jpg');
+
+		let filename = file.filename.split('.');
+		filename[filename.length - 1] = 'jpg';
+		files[i].filename = filename.join('.');
+
+		file.mimetype = file.mimetype.replace(file.filename.split('.')[file.filename.split('.').length - 1], 'jpg');
+		files[i].mimetype = file.mimetype;
+
+
+
+		return {
+			path: path.join('/static', file.filename),
+			format: file.mimetype,
+		};
+	})
+
+	const Imgs = await Promise.all(stop);
+
 	req.body = {
 		...Format(req.body),
-		Imgs: files.map((img: any) => {
-			return {
-				path: path.join('/static', img.filename),
-				format: img.mimetype,
-			};
-		})
+		Imgs
 	};
 
 	req.log.info('req.body', req.body);
@@ -77,6 +110,5 @@ const valid: preValidationHookHandler = (req, reply, done): void => {
 };
 
 
-export const FormatData: preValidationHookHandler[] = [multer(options).array('images', 20), valid]
+export const FormatData: preValidationHookHandler[] = [upload.array('images', 20), valid]
 
-export const upload = multer(options);
