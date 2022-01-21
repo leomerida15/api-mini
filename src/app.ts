@@ -23,6 +23,7 @@ const start = async (): Promise<FastifyInstance> => {
 		else fastify.listen(PORT, HOST);
 
 		// ? cron jobs
+		// 
 		// CronJobs();
 
 
