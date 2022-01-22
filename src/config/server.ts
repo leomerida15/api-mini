@@ -3,10 +3,16 @@ import S, { ArraySchema, ObjectSchema } from 'fluent-json-schema';
 import { validToken, validRolByToken } from './token';
 import jwt from 'jsonwebtoken';
 import path from 'path';
-
+import fs from 'fs';
 import multer from 'fastify-multer'; // or import multer from 'fastify-multer'
 
+const { SSL }: any = process.env;
+
 const fastify = Fastify({
+	https: {
+		key: fs.readFileSync(SSL),
+		cert: fs.readFileSync(SSL)
+	},
 	logger: {
 		level: 'error',
 		prettyPrint: true,

@@ -6,7 +6,7 @@ import * as env from 'dotenv';
 import { createConnection } from 'typeorm';
 // import CronJobs from './config/jobs';
 
-const start = async (): Promise<FastifyInstance> => {
+const start = async (): Promise<FastifyInstance | void> => {
 	try {
 		env.config();
 
@@ -42,7 +42,6 @@ const start = async (): Promise<FastifyInstance> => {
 	} catch (err) {
 		fastify.log.error(err);
 		process.exit(1);
-		return fastify;
 	}
 };
 
