@@ -19,7 +19,12 @@ const start = async (): Promise<FastifyInstance | void> => {
 		Router(fastify);
 
 		// ? levantando servidor
-		if (NODE_ENV === 'developing') await fastify.listen(PORT);
+		if (NODE_ENV === 'developing') {
+
+			const http = await fastify.listen(PORT);
+
+			console.log('http', http);
+		}
 		// 
 		else fastify.listen(PORT, HOST);
 
