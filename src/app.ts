@@ -26,7 +26,13 @@ const start = async (): Promise<FastifyInstance | void> => {
 			console.log('http', http);
 		}
 		// 
-		else fastify.listen(PORT, HOST);
+		else {
+
+
+			const http = fastify.listen(PORT, HOST);
+
+			console.log('http', http);
+		}
 
 		// ? cron jobs
 		// 
