@@ -29,7 +29,7 @@ const start = async (): Promise<FastifyInstance | void> => {
 		else {
 
 
-			const http = fastify.listen(PORT, HOST);
+			const http = await fastify.listen(PORT, HOST);
 
 			console.log('http', http);
 		}
