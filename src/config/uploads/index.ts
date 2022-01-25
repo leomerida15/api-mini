@@ -22,7 +22,7 @@ export const upload = multer({
 		console.log('file', file);
 
 
-		const filetypes = /.jpeg|.jpg|.png|.pdf|.xlsx/;
+		const filetypes = /.jpeg|.jpg|.png|.pdf|vnd.openxmlformats-officedocument.spreadsheetml.sheet/;
 		const mimetype = filetypes.test(file.mimetype);
 		console.log('mimetype', mimetype);
 
