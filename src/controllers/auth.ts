@@ -27,7 +27,6 @@ export const registerBig = async (
 
 	const obj = xlsx.parse(buffer);
 
-
 	const [nombres, ...rest] = obj[0].data as string[][];
 
 	const keys = nombres.map((nombre, i) => {
@@ -41,25 +40,26 @@ export const registerBig = async (
 
 	const rolesDB = await getRepository('Rols').find({ name: Not('Admin') }) as Rols[]
 
+	const info = rest
+		.filter((items) => items.length)
+		.map((items) => {
+			// 
+			const obj = items.map((item, i) => {
+				const key = keys[i];
 
-	const info = rest.map((items) => {
-		// 
-		const obj = items.map((item, i) => {
-			const key = keys[i];
+				if (key !== 'roles') return [keys[i], item]
 
-			if (key !== 'roles') return [keys[i], item]
+				const roles = rolesDB.filter((rol) => rol.id! == parseInt(item))
 
-			const roles = rolesDB.filter((rol) => rol.id! == parseInt(item))
+				return [key, roles]
+			});
 
-			return [key, roles]
+			return Object.fromEntries(obj);
+		}).map((item) => {
+			const password = bcrypt.hashSync(item.email, 12);
+
+			return { ...item, password };
 		});
-
-		return Object.fromEntries(obj);
-	}).map((item) => {
-		const password = bcrypt.hashSync(item.email, 12);
-
-		return { ...item, password };
-	});
 
 	const emails = info.map((item) => item.email);
 
@@ -70,7 +70,7 @@ export const registerBig = async (
 		const email = user.email;
 
 		return users.find((user) => user.email === email)
-	})
+	});
 
 	if (usersSave.length) await getRepository('Users').save(usersSave);
 
