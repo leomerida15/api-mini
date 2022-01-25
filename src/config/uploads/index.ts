@@ -21,10 +21,9 @@ export const upload = multer({
 	fileFilter: (req, file, cb) => {
 		const mimetype = ['jpeg', 'jpg', 'png', "pdf", "xlsx"].includes(file.originalname.split('.').pop()!);
 
-		if (mimetype) {
-			return cb(null, true);
-		}
-		cb(new Error('el formato del archivo no es valido'), false);
+		if (mimetype) return cb(null, true);
+
+		else return cb(new Error('el formato del archivo no es valido'), false);
 	},
 });
 
@@ -71,28 +70,37 @@ const Format = (body: any): { [k: string | number | symbol]: any } => {
 const valid: preValidationHookHandler = async (req, reply, done): Promise<void> => {
 	const { files }: any = req;
 
-	const filePath = path.join(path.resolve(), 'static', files.file.filename);
+	const stop = files
+
+		.map(async (file: any, i: number) => {
+
+			const valid = ['jpeg', 'jpg', 'png'].includes(file.originalname.split('.').pop()!);
+
+			if (valid) {
+
+				await Doc.Convert(file.filename, 'jpg');
+
+				let filename = file.filename.split('.');
+				filename[filename.length - 1] = 'jpg';
+				files[i].filename = filename.join('.');
+
+				file.mimetype = file.mimetype.replace(file.filename.split('.')[file.filename.split('.').length - 1], 'jpg');
+				files[i].mimetype = file.mimetype;
 
 
-	const stop = files.map(async (file: any, i: number) => {
+
+				return {
+					path: path.join('/static', file.filename),
+					format: file.mimetype,
+				};
+			}
 
 
-		await Doc.Convert(file.filename, 'jpg');
-
-		let filename = file.filename.split('.');
-		filename[filename.length - 1] = 'jpg';
-		files[i].filename = filename.join('.');
-
-		file.mimetype = file.mimetype.replace(file.filename.split('.')[file.filename.split('.').length - 1], 'jpg');
-		files[i].mimetype = file.mimetype;
-
-
-
-		return {
-			path: path.join('/static', file.filename),
-			format: file.mimetype,
-		};
-	})
+			return {
+				path: path.join('/static', file.filename),
+				format: file.mimetype,
+			};
+		})
 
 	const Imgs = await Promise.all(stop);
 

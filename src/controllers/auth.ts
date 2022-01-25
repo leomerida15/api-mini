@@ -14,10 +14,11 @@ import Rols from '../db/models/Rols';
 
 export const registerBig = async (
 	req: FastifyRequest<{
-		Body: { Imgs: any[] };
+		Body: { Imgs: { path: string, format: string }[] }
 	}>,
 	reply: FastifyReply,
 ): Promise<void> => {
+
 	const { Imgs } = req.body;
 
 	const route = path.join(path.resolve(), Imgs[0].path);
@@ -25,6 +26,7 @@ export const registerBig = async (
 	const buffer = await fs.readFile(route);
 
 	const obj = xlsx.parse(buffer);
+
 
 	const [nombres, ...rest] = obj[0].data as string[][];
 
@@ -60,15 +62,14 @@ export const registerBig = async (
 	});
 
 	const emails = info.map((item) => item.email);
+
 	const users = await getRepository('Users').find({ email: In(emails) }) as Users[];
 
 
 	const usersSave = info.filter((user) => {
 		const email = user.email;
 
-		const exist = users.find((user) => user.email === email);
-
-		return !exist;
+		return users.find((user) => user.email === email)
 	})
 
 	if (usersSave.length) await getRepository('Users').save(usersSave);

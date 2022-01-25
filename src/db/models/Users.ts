@@ -15,8 +15,8 @@ import Rols from './Rols';
 
 const transformer = () => {
 
-	const to = (value: string) => value.toLowerCase();
-	const from = (value: string) => value.toLowerCase();
+	const to = (value: string) => `${value}`.toLowerCase();
+	const from = (value: string) => `${value}`.toLowerCase();
 
 	return { to, from }
 }
