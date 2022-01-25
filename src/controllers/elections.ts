@@ -22,7 +22,7 @@ export const getElectionsById = async (
 		orderby: { Options: { id: 'DESC' } },
 	});
 
-	if (!info) throw { message: 'la eleccion suministrada no existe', statusCode: 400 };
+	if (!info) throw { message: 'La eleccion suministrada no existe', statusCode: 400 };
 
 	return reply.status(200).send({ message: 'Eleccion', info });
 };
@@ -33,7 +33,7 @@ export const getStatusToElections = async (
 ): Promise<void> => {
 	const info = await getRepository('Election_Status').find() as Election_Status[];
 
-	reply.status(200).send({ message: 'status de elecciones', info });
+	reply.status(200).send({ message: 'Estado de elecciones', info });
 }
 
 export const getElectionsAll = async (
@@ -45,7 +45,7 @@ export const getElectionsAll = async (
 	const info = await getRepository('Elections').find({
 		relations: ['Options', 'Options.Imgs', 'status'],
 	});
-	if (!info.length) throw { message: 'no existen elecciones', statusCode: 400 };
+	if (!info.length) throw { message: 'No existen elecciones', statusCode: 400 };
 
 	reply.status(200).send({ message: 'Elecciones', info });
 };
@@ -57,7 +57,7 @@ export const createElections = async (
 	reply: FastifyReply
 ): Promise<void> => {
 	const valid = await getRepository('Elections').count({ status: Not(4) });
-	if (valid) throw { message: 'ya existe una eleccion activa', statusCode: 400 };
+	if (valid) throw { message: 'Ya existe una eleccion activa', statusCode: 400 };
 	//
 	req.body.status = 1;
 	// 
@@ -101,7 +101,7 @@ export const editElectionsById = async (
 
 	if (status && status !== 4) {
 		const valid = await getRepository('Elections').count({ status: Not(4), id: Not(req.params.id) });
-		if (valid) throw { message: 'ya existe una eleccion activa', statusCode: 400 };
+		if (valid) throw { message: 'Ya existe una eleccion activa', statusCode: 400 };
 	}
 
 	await getRepository('Elections').update(req.params.id, req.body);
@@ -131,7 +131,7 @@ export const voteOptionToElection = async (
 		relations: ['Imgs'],
 	})) as Options | undefined;
 
-	if (!option || !election) throw { message: 'la opcion o la eleccion suministradas no existe', statusCode: 400 };
+	if (!option || !election) throw { message: 'La opcion o la eleccion suministradas no existe', statusCode: 400 };
 
 	const ids_options = election.Options!
 		.map((option) => option.id);
@@ -162,7 +162,7 @@ export const voteOptionToElection = async (
 
 		const { id: id_option, votes } = valid.Option as Options;
 
-		if (`${id_option}` === req.params.id_option) throw { message: 'ya voto por esta opcion', statusCode: 400 };
+		if (`${id_option}` === req.params.id_option) throw { message: 'Ya voto por esta opcion', statusCode: 400 };
 
 		await getRepository('R_User_Options').update(valid.id, { Option: req.params.id_option });
 
@@ -171,7 +171,7 @@ export const voteOptionToElection = async (
 		info = await getRepository('Options').update(req.params.id_option, { votes: option.votes + 1 });
 	}
 
-	reply.status(200).send({ message: 'su voto fue efectuado con exito', info });
+	reply.status(200).send({ message: 'Su voto fue efectuado con exito', info });
 };
 
 export const getUltimateElection = async (
@@ -183,7 +183,7 @@ export const getUltimateElection = async (
 		order: { createdAt: 'DESC' }
 	});
 
-	if (!info) throw { message: 'no existe una eleccion activa', statusCode: 400 };
+	if (!info) throw { message: 'No existe una eleccion activa', statusCode: 400 };
 
 	reply.status(200).send({ message: 'Ultima eleccion', info });
 }

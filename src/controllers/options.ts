@@ -25,7 +25,7 @@ export const createOptions = async (
 
 	const info = await getRepository('Options').save(req.body);
 
-	reply.status(200).send({ message: 'opciones creada', info });
+	reply.status(200).send({ message: 'Opciones creada', info });
 };
 
 export const addImgToOption = async (
@@ -37,7 +37,7 @@ export const addImgToOption = async (
 ): Promise<void> => {
 
 	const valid = await getRepository('Options').count({ where: { id: req.params.id } });
-	if (!valid) throw { message: 'no existe la opcion', statusCode: 400 };
+	if (!valid) throw { message: 'No existe la opcion', statusCode: 400 };
 
 
 	const imgs = await getRepository('Imgs').save(req.body.Imgs!);
@@ -72,7 +72,7 @@ export const getOptionsById = async (
 ): Promise<void> => {
 	const info = await getRepository(Options).findOne({ where: { id: req.params.id }, relations: ['Imgs'] });
 
-	reply.status(200).send({ message: Msg('opcion').getBy('id'), info });
+	reply.status(200).send({ message: Msg('Opcion').getBy('id'), info });
 };
 
 interface bodyEditOption extends Options {
@@ -86,10 +86,9 @@ export const editOptions = async (
 	}>,
 	reply: FastifyReply
 ): Promise<void> => {
-
 	await getRepository('Options').update(req.params.id, req.body);
 
 	const info = await getRepository('Options').findOne({ where: { id: req.params.id }, relations: ['Imgs'] });
 
-	reply.status(200).send({ message: 'opciones editada', info });
+	reply.status(200).send({ message: 'Opciones editada', info });
 };
