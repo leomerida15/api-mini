@@ -2,8 +2,8 @@ import multer, { diskStorage } from 'fastify-multer'; // or import multer from '
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { FastifyRequest, preValidationHookHandler } from 'fastify';
-import Jimp from 'jimp/*';
 import * as Doc from '../../hooks/docs';
+
 
 const filename = (req: FastifyRequest, file: any, cb: any) => {
 	cb(null, uuidv4() + '@' + file.originalname.replace(/ /gi, '_'));
@@ -19,19 +19,9 @@ const storage = diskStorage({
 export const upload = multer({
 	storage,
 	fileFilter: (req, file, cb) => {
-		console.log('file', file);
+		const mimetype = ['jpeg', 'jpg', 'png', "pdf", "xlsx"].includes(file.originalname.split('.').pop()!);
 
-
-		const filetypes = /.jpeg|.jpg|.png|.pdf|vnd.openxmlformats-officedocument.spreadsheetml.sheet/;
-		const mimetype = ['.jpeg', '.jpg', '.png', ".pdf", ".xlsx"].includes(file.originalname.split('.').pop()!);
-		console.log('mimetype', mimetype);
-
-		const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-
-		console.log('extname', extname);
-
-
-		if (mimetype && extname) {
+		if (mimetype) {
 			return cb(null, true);
 		}
 		cb(new Error('el formato del archivo no es valido'), false);
