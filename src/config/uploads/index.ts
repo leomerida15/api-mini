@@ -19,10 +19,17 @@ const storage = diskStorage({
 export const upload = multer({
 	storage,
 	fileFilter: (req, file, cb) => {
+		console.log('file', file);
 
-		const filetypes = /jpeg|jpg|png|pdf|xlsx/;
+
+		const filetypes = /.jpeg|.jpg|.png|.pdf|.xlsx/;
 		const mimetype = filetypes.test(file.mimetype);
+		console.log('mimetype', mimetype);
+
 		const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+		console.log('extname', extname);
+
 
 		if (mimetype && extname) {
 			return cb(null, true);
