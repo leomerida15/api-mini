@@ -11,8 +11,8 @@ const { SSL }: any = process.env;
 const fastify = Fastify({
 	https: {
 		key: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta'),
-		cert: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta')
-	},
+		cert: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta
+        },
 	logger: {
 		level: 'error',
 		prettyPrint: true,
@@ -55,7 +55,7 @@ fastify.addHook('onRequest', (req, reply, done) => {
 		const { authorization } = req.headers;
 
 		if (validToken(req.url)) {
-			if (!authorization) throw { message: 'no esta autorisado', statusCode: 403 };
+			if (!authorization) throw { message: 'No esta autorisado', statusCode: 403 };
 
 			const token: any = jwt.verify(authorization, 'nojodas');
 			req.headers.authorization = JSON.stringify(token);
@@ -63,7 +63,7 @@ fastify.addHook('onRequest', (req, reply, done) => {
 			const { routerPath, routerMethod } = req;
 
 			const validRols = validRolByToken(token.roles, { routerPath, routerMethod });
-			if (!validRols) throw { message: 'no esta autorisado', statusCode: 403 };
+			if (!validRols) throw { message: 'No esta autorisado', statusCode: 403 };
 		}
 
 		done();

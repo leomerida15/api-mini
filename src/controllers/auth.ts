@@ -73,7 +73,7 @@ export const registerBig = async (
 
 	if (usersSave.length) await getRepository('Users').save(usersSave);
 
-	reply.status(200).send({ message: 'usuarios registrados' });
+	reply.status(200).send({ message: 'Usuarios registrados' });
 };
 
 export const register = async (
@@ -88,7 +88,7 @@ export const register = async (
 
 	const valid = await getRepository('Users').count({ email });
 
-	if (valid) throw { message: 'el correo suministrado ya existe', code: 400 };
+	if (valid) throw { message: 'El correo suministrado ya existe', code: 400 };
 
 	req.body.password = await bcrypt.hash(password, 12);
 	const user: Users = req.body;
@@ -97,7 +97,7 @@ export const register = async (
 
 	const info = await getRepository('Users').findOne({ where: { email }, relations: ['roles'] });
 
-	return reply.status(200).send({ message: 'usuario registrado', info });
+	return reply.status(200).send({ message: 'Usuario registrado', info });
 };
 
 export const login = async (
@@ -115,11 +115,11 @@ export const login = async (
 		relations: ['roles'],
 	})) as Users | undefined;
 
-	if (!user) throw { message: 'el correo suministrado no existe', code: 400 };
+	if (!user) throw { message: 'El correo suministrado no existe', code: 400 };
 
 	const passValid = await bcrypt.compare(req.body.password, user.password);
 
-	if (!passValid) throw { message: 'contraseña incorrecta' };
+	if (!passValid) throw { message: 'Contraseña incorrecta' };
 
 	const { id, roles } = user;
 
@@ -130,7 +130,6 @@ export const login = async (
 
 
 	const election = await (async () => {
-
 
 		const activas = ((await getRepository('Elections').findOne({
 			where: [{ status: Not(4) }],
@@ -145,6 +144,7 @@ export const login = async (
 			relations: ['Options', 'status', 'Options.Imgs'],
 			orderby: { createAt: 'DESC' },
 		})) as Elections | undefined);
+
 	})()
 
 	let option: any = {};
@@ -166,7 +166,7 @@ export const login = async (
 	}
 
 	reply.status(200).send({
-		message: 'usuario logeado',
+		message: 'Usuario logeado',
 		info,
 		token,
 		option,
@@ -187,7 +187,7 @@ export const getUsers = async (
 		relations: ['roles'],
 	})) as Users[];
 
-	reply.status(200).send({ message: 'usuarios', info });
+	reply.status(200).send({ message: 'Usuarios', info });
 };
 
 export const newPassEmail = async (
@@ -198,7 +198,7 @@ export const newPassEmail = async (
 ): Promise<void> => {
 	const { email } = req.body;
 	const user = (await getRepository('Users').findOne({ email }) as Users | undefined);
-	if (!user) throw { message: 'el correo suministrado no existe', code: 400 };
+	if (!user) throw { message: 'El correo suministrado no existe', code: 400 };
 
 	// const password = 
 	const randon = Math.random().toString(36).slice(-8);
@@ -229,7 +229,7 @@ export const newPass = async (
 
 	await getRepository('Users').update({ email: token.email }, { password });
 
-	reply.status(200).send({ message: 'contraseña editada' });
+	reply.status(200).send({ message: 'Contraseña editada' });
 };
 
 export const editUser = async (
@@ -243,7 +243,7 @@ export const editUser = async (
 	const { id } = req.params;
 
 	const user = (await getRepository('Users').findOne({ id }) as Users | undefined);
-	if (!user) throw { message: 'el correo suministrado no existe', code: 400 };
+	if (!user) throw { message: 'El correo suministrado no existe', code: 400 };
 
 	const { roles, ...data } = req.body;
 	await getRepository('Users').update(id, data);
@@ -260,7 +260,7 @@ export const editUser = async (
 
 	}
 
-	reply.status(200).send({ message: 'usuario editado' });
+	reply.status(200).send({ message: 'Usuario editado' });
 };
 
 export const deleteUser = async (
@@ -276,5 +276,5 @@ export const deleteUser = async (
 
 	await getRepository('Users').delete(id);
 
-	reply.status(200).send({ message: 'usuario eliminado' });
+	reply.status(200).send({ message: 'Usuario eliminado' });
 };

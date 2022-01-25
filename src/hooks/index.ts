@@ -10,7 +10,7 @@ interface token {
 
 export const validRol: preHandlerHookHandler = (req, reply, done) => {
 	try {
-		if (!req.headers.authorization) throw { message: 'debe enviar un token valido', code: 401 };
+		if (!req.headers.authorization) throw { message: 'Debe enviar un token valido', code: 401 };
 		const token: token = JSON.parse(req.headers.authorization);
 
 		done();
