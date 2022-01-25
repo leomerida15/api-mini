@@ -20,7 +20,7 @@ export const upload = multer({
 	storage,
 	fileFilter: (req, file, cb) => {
 
-		const filetypes = /.jpeg|.jpg|.png|.pdf|.xlsx/;
+		const filetypes = /jpeg|jpg|png|pdf|xlsx/;
 		const mimetype = filetypes.test(file.mimetype);
 		const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
 
