@@ -23,7 +23,7 @@ export const upload = multer({
 
 
 		const filetypes = /.jpeg|.jpg|.png|.pdf|vnd.openxmlformats-officedocument.spreadsheetml.sheet/;
-		const mimetype = filetypes.test(file.mimetype);
+		const mimetype = ['.jpeg', '.jpg', '.png', ".pdf", ".xlsx"].includes(file.originalname.split('.').pop()!);
 		console.log('mimetype', mimetype);
 
 		const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
