@@ -11,8 +11,8 @@ const { SSL }: any = process.env;
 const fastify = Fastify({
 	https: {
 		key: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta'),
-		cert: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta
-        },
+		cert: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta'),
+	},
 	logger: {
 		level: 'error',
 		prettyPrint: true,
