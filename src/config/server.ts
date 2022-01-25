@@ -9,10 +9,10 @@ import multer from 'fastify-multer'; // or import multer from 'fastify-multer'
 const { SSL }: any = process.env;
 
 const fastify = Fastify({
-	// https: {
-	// 	key: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta'),
-	// 	cert: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta'),
-	// },
+	https: {
+		key: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta'),
+		cert: fs.readFileSync('../../../../etc/ssl/sabaneta/sabaneta'),
+	},
 	logger: {
 		level: 'error',
 		prettyPrint: true,
