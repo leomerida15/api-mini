@@ -1,12 +1,12 @@
 import nodemailer, { SendMailOptions } from 'nodemailer';
 
 export const mailer = nodemailer.createTransport({
-    host: "smtp.sendgrid.net",
-    port: 587,
-    secure: true,
+    host: "localhost",
+    port: 25,
+    secure: false,
     auth: {
-        user: "apikey",
-        pass: "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"
+        user: "dev@grandiose-pear.com",
+        pass: "VitM24001470"
     }
 });
 
@@ -22,7 +22,8 @@ const mailMsg = (name: string, clave: string): string => {
             style="max-width: 600px; margin: 0 auto; background-color: #fff; font: 14px sans-serif; border-top: 4px solid #004063">
             <!--  -->
             <div style="border-bottom: 1px solid #f2f3f5; padding: 2px 10px;background-color: #fff">
-                <div style="background-color: #fff;text-align: center;">
+                <div style="background-colyar nserve
+                or: #fff;text-align: center;">
                     <img style="width: 70%"
                         src="https://sabaneta.miproyectoparticipativo.com/img/Lodo_Sabaneta_60x60.png" />
                 </div>
