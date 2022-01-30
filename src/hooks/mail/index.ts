@@ -8,6 +8,8 @@ export const mailer = nodemailer.createTransport({
     },
 });
 
+
+
 const mailMsg = (name: string, clave: string): string => {
     /*html*/
     return `

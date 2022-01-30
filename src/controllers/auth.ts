@@ -29,14 +29,15 @@ export const registerBig = async (
 
 	const [nombres, ...rest] = obj[0].data as string[][];
 
-	const keys = nombres.map((nombre, i) => {
-		// 
-		if (nombre === 'correo') return 'email';
-		// 
-		if (nombre === 'nombre') return 'name';
-		// 
-		return 'roles';
-	});
+	const keys = nombres
+		.map((nombre, i) => {
+			// 
+			if (nombre === 'correo') return 'email';
+			// 
+			if (nombre === 'nombre') return 'name';
+			// 
+			return 'roles';
+		});
 
 	const rolesDB = await getRepository('Rols').find({ name: Not('Admin') }) as Rols[]
 
@@ -49,28 +50,38 @@ export const registerBig = async (
 
 				if (key !== 'roles') return [keys[i], item]
 
-				const roles = rolesDB.filter((rol) => rol.id! == parseInt(item))
+				if (!item.includes(',')) {
+					const roles = rolesDB.filter((rol) => rol.id! == parseInt(item))
+
+					return [key, roles]
+				}
+
+				const rols = item.split(',').map((rol) => parseInt(rol));
+
+
+				const roles = rolesDB.filter((rol) => rols.includes(rol.id!))
+
 
 				return [key, roles]
 			});
 
-			return Object.fromEntries(obj);
-		}).map((item) => {
+			if (obj[0]) return Object.fromEntries(obj);
+
+			return false
+		})
+		.filter((item) => item)
+		.map((item) => {
 			const password = bcrypt.hashSync(item.email, 12);
 
 			return { ...item, password };
 		});
 
-	const emails = info.map((item) => item.email);
 
-	const users = await getRepository('Users').find({ email: In(emails) }) as Users[];
+	const emails = info.map((item) => { email: item.email });
 
+	const users = await getRepository('users').find(emails) as Users[];
 
-	const usersSave = info.filter((user) => {
-		const email = user.email;
-
-		return users.find((user) => user.email === email)
-	});
+	const usersSave = info.filter(({ email }) => !users.find((user) => user.email === email));
 
 	if (usersSave.length) await getRepository('Users').save(usersSave);
 
