@@ -1,13 +1,11 @@
 import nodemailer, { SendMailOptions } from 'nodemailer';
 
 export const mailer = nodemailer.createTransport({
-    host: "localhost",
-    port: 25,
-    secure: false,
+    service: 'gmail',
     auth: {
-        user: "dev@grandiose-pear.com",
-        pass: "VitM24001470"
-    }
+        user: 'miproy.participativo.sab@gmail.com',
+        pass: 'Sabana123*',
+    },
 });
 
 const mailMsg = (name: string, clave: string): string => {
